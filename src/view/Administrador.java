@@ -1,7 +1,9 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
@@ -9,11 +11,14 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 public class Administrador extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JLabel logoBonanza;
 
 	public static void main(String[] args) {
 
@@ -44,6 +49,24 @@ public class Administrador extends JFrame {
 	}
 
 	public Administrador() {
+		
+		addComponentListener(new ComponentAdapter() {
+			
+			@Override
+			public void componentResized(ComponentEvent arg0) {
+				
+				int metadeLarguraTituloPesquisa = Integer.parseInt(""
+						+ ((contentPane.getWidth() / 2) - 295));
+
+				int metadeAlturaTituloPesquisa = Integer.parseInt(""
+						+ ((contentPane.getHeight() / 2) - 95));
+
+				logoBonanza.setBounds(metadeLarguraTituloPesquisa,
+						metadeAlturaTituloPesquisa, 590, 190);
+				
+			}
+			
+		});
 
 		setTitle("BONANZA SUPERMECADOS - T\u00C1 BEM AQUI");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -67,9 +90,18 @@ public class Administrador extends JFrame {
 
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		logoBonanza = new JLabel("");
+		logoBonanza.setIcon(new ImageIcon(Administrador.class.getResource("/view/img/logo-bonanza.png")));
+		logoBonanza.setBounds(115, 187, 590, 190);
+		contentPane.add(logoBonanza);
+		
+		JLabel fundoPrincipal = new JLabel("");
+		fundoPrincipal.setIcon(new ImageIcon(Administrador.class.getResource("/view/img/fundo-principal.jpg")));
+		fundoPrincipal.setBounds(0, 0, 1920, 1080);
+		contentPane.add(fundoPrincipal);
 
 	}
-
 }
