@@ -14,6 +14,8 @@ import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -52,87 +54,120 @@ public class Login extends JFrame {
 	}
 
 	public Login() {
-		
+
 		setResizable(false);
 		setTitle("BONANZA SUPERMECADOS - LOGIN");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 841, 491);
+		setBounds(100, 100, 698, 472);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
-		
-		
+
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel botaoPrincipal = new JLabel("");
 		botaoPrincipal.addMouseListener(new MouseAdapter() {
-			
+
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
-				
-				botaoPrincipal.setIcon(new ImageIcon(Login.class.getResource("/view/img/botao_login_mouse.png")));
-				
+
+				botaoPrincipal.setIcon(new ImageIcon(Login.class
+						.getResource("/view/img/botao_login_mouse.png")));
+
 			}
-			
+
 			@Override
 			public void mouseExited(MouseEvent e) {
-				
-				botaoPrincipal.setIcon(new ImageIcon(Login.class.getResource("/view/img/botao_login.png")));
-				
+
+				botaoPrincipal.setIcon(new ImageIcon(Login.class
+						.getResource("/view/img/botao_login.png")));
+
 			}
-			
+
 		});
-		
-		JLabel botaoFecharError = new JLabel("");
-		botaoFecharError.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				botaoFecharError.setIcon(new ImageIcon(Login.class.getResource("/view/img/close_msg_login_mouse.jpg")));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				botaoFecharError.setIcon(new ImageIcon(Login.class.getResource("/view/img/close_msg_login.jpg")));
-			}
-		});
-		
+
 		campoLogin = new JTextField();
-		campoLogin.setBounds(253, 168, 293, 34);
+		campoLogin.setBounds(185, 131, 293, 34);
 		campoLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		campoLogin.setBackground(Color.WHITE);
-		campoLogin.setBorder(new LineBorder(Color.WHITE));
+		campoLogin.setBackground(new Color(240, 238, 240));
+		campoLogin.setBorder(new LineBorder(new Color(240, 238, 240)));
 		campoLogin.setText("Digite seu Login");
 		campoLogin.setHorizontalAlignment(SwingConstants.LEFT);
 		contentPane.add(campoLogin);
 		campoLogin.setColumns(10);
-		
+
+		campoLogin.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+
+				if (campoLogin.getText().equals("Digite seu Login")) {
+
+					if (arg0.getKeyCode() == KeyEvent.VK_ESCAPE) {
+
+					}
+
+					else {
+
+						campoLogin.setText("");
+
+					}
+
+				}
+
+				if (campoLogin.getText().equals("Digite seu Login")
+						& arg0.getKeyCode() == KeyEvent.VK_ENTER) {
+
+				}
+
+				else if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
+
+				}
+
+				else if (arg0.getKeyCode() == KeyEvent.VK_DOWN) {
+
+					campoSenha.requestFocus();
+
+				}
+
+			}
+
+		});
+
 		campoSenha = new JPasswordField();
 		campoSenha.setColumns(10);
-		campoSenha.setBounds(253, 238, 293, 34);
+		campoSenha.setBounds(185, 202, 293, 34);
 		campoSenha.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		campoSenha.setBackground(Color.WHITE);
-		campoSenha.setBorder(new LineBorder(Color.WHITE));
+		campoSenha.setBackground(new Color(240, 238, 240));
+		campoSenha.setBorder(new LineBorder(new Color(240, 238, 240)));
 		campoSenha.setText("Senha");
 		campoSenha.setHorizontalAlignment(SwingConstants.LEFT);
+
 		contentPane.add(campoSenha);
+
+		botaoPrincipal.setIcon(new ImageIcon(Login.class
+				.getResource("/view/img/botao_login.png")));
 		
-		botaoFecharError.setIcon(new ImageIcon(Login.class.getResource("/view/img/close_msg_login.jpg")));
-		botaoFecharError.setBounds(572, 15, 47, 46);
-		contentPane.add(botaoFecharError);
-		
-		JLabel fundoMensagemError = new JLabel("");
-		fundoMensagemError.setIcon(new ImageIcon(Login.class.getResource("/view/img/fundo_erro_login.jpg")));
-		fundoMensagemError.setBounds(219, 15, 356, 46);
-		contentPane.add(fundoMensagemError);
-		botaoPrincipal.setIcon(new ImageIcon(Login.class.getResource("/view/img/botao_login.png")));
-		botaoPrincipal.setBounds(241, 300, 356, 50);
+		botaoPrincipal.setBounds(169, 270, 356, 44);
+
 		contentPane.add(botaoPrincipal);
-		
+
 		JLabel fundoPrincipal = new JLabel("");
-		fundoPrincipal.setIcon(new ImageIcon(Login.class.getResource("/view/img/fundo_login.jpg")));
-		fundoPrincipal.setBounds(0, 0, 835, 463);
+		
+		fundoPrincipal.setIcon(new ImageIcon(Login.class
+				.getResource("/view/img/fundo_login.jpg")));
+		
+		fundoPrincipal.setBounds(0, 0, 694, 446);
+
 		contentPane.add(fundoPrincipal);
 
 	}
+	
+	public void validarLogin() {
+		
+		
+		
+	}
+
 }
