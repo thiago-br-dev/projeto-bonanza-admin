@@ -6,9 +6,11 @@ import java.awt.EventQueue;
 import java.awt.Font;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
@@ -36,6 +38,9 @@ public class Login extends JFrame {
 
 				try {
 
+					UIManager
+						.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+					
 					Login frame = new Login();
 					frame.setVisible(true);
 
@@ -86,6 +91,13 @@ public class Login extends JFrame {
 
 			}
 
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				validarLogin();
+				
+			}
+			
 		});
 
 		campoLogin = new JTextField();
@@ -99,6 +111,7 @@ public class Login extends JFrame {
 		campoLogin.setColumns(10);
 
 		campoLogin.addKeyListener(new KeyAdapter() {
+			
 			@Override
 			public void keyPressed(KeyEvent arg0) {
 
@@ -119,10 +132,14 @@ public class Login extends JFrame {
 				if (campoLogin.getText().equals("Digite seu Login")
 						& arg0.getKeyCode() == KeyEvent.VK_ENTER) {
 
+					validarLogin();
+					
 				}
 
 				else if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
 
+					validarLogin();
+					
 				}
 
 				else if (arg0.getKeyCode() == KeyEvent.VK_DOWN) {
@@ -144,6 +161,48 @@ public class Login extends JFrame {
 		campoSenha.setText("Senha");
 		campoSenha.setHorizontalAlignment(SwingConstants.LEFT);
 
+		campoSenha.addKeyListener(new KeyAdapter() {
+			
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+
+				if (campoSenha.getText().equals("Senha")) {
+
+					if (arg0.getKeyCode() == KeyEvent.VK_ESCAPE) {
+
+					}
+
+					else {
+
+						campoSenha.setText("");
+
+					}
+
+				}
+
+				if (campoSenha.getText().equals("Senha")
+						& arg0.getKeyCode() == KeyEvent.VK_ENTER) {
+
+					validarLogin();
+					
+				}
+
+				else if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
+
+					validarLogin();
+					
+				}
+
+				else if (arg0.getKeyCode() == KeyEvent.VK_UP) {
+
+					campoLogin.requestFocus();
+
+				}
+
+			}
+
+		});
+		
 		contentPane.add(campoSenha);
 
 		botaoPrincipal.setIcon(new ImageIcon(Login.class
@@ -166,7 +225,19 @@ public class Login extends JFrame {
 	
 	public void validarLogin() {
 		
+		if (campoLogin.getText().trim().isEmpty() | campoLogin.getText().equals("Digite seu Login")) {
+			
+			JOptionPane.showMessageDialog(null, "O campo de login está vazio. Digite algo e tente novamente.", "Bonanza Supermecados", JOptionPane.ERROR_MESSAGE);
+			campoLogin.requestFocus();
+			
+		}
 		
+		else if (campoSenha.getText().trim().isEmpty() | campoSenha.getText().equals("Senha")) {
+			
+			JOptionPane.showMessageDialog(null, "O campo de senha está vazio. Digite algo e tente novamente.", "Bonanza Supermecados", JOptionPane.ERROR_MESSAGE);
+			campoSenha.requestFocus();
+			
+		}
 		
 	}
 
