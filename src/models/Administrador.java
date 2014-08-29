@@ -1,6 +1,6 @@
 package models;
 
-public class Adm {
+public class Administrador {
 	
 	private int id;
 	private String nome;
