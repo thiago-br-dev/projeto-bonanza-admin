@@ -90,11 +90,34 @@ public class Administrador extends JFrame {
 
 		JMenu mnPrincipal = new JMenu("Principal");
 		menuBar.add(mnPrincipal);
+		
+		JMenuItem mntmFinalizarSesso = new JMenuItem("Logoff");
+		mntmFinalizarSesso.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				Login.main(null);
+			}
+		});
+		mnPrincipal.add(mntmFinalizarSesso);
+		
+		JMenuItem mntmSair = new JMenuItem("Fechar Programa");
+		mntmSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			System.exit(0);
+			}
+		});
+		mnPrincipal.add(mntmSair);
 
 		JMenu mnRelatrios = new JMenu("Relat\u00F3rios");
 		menuBar.add(mnRelatrios);
 		
 		JMenuItem mntmGerarNovo = new JMenuItem("Gerar Novo");
+		mntmGerarNovo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				GerarRelatorio.main(null);
+			}
+		});
+		mntmGerarNovo.setIcon(new ImageIcon(Administrador.class.getResource("/view/img/gerar_relatorio.png")));
 		mnRelatrios.add(mntmGerarNovo);
 
 		JMenu mnConfigurao = new JMenu("Configura\u00E7\u00E3o");
