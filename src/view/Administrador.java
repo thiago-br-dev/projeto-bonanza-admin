@@ -3,6 +3,9 @@ package view;
 import java.awt.EventQueue;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
@@ -12,6 +15,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -70,9 +74,16 @@ public class Administrador extends JFrame {
 		});
 
 		setTitle("BONANZA SUPERMECADOS - T\u00C1 BEM AQUI");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 1000, 700);
 		setExtendedState(MAXIMIZED_BOTH);
+		
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent evt) {
+				dispose();
+				Login.main(null);
+			}
+		});
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -90,6 +101,7 @@ public class Administrador extends JFrame {
 		menuBar.add(mnConfigurao);
 		
 		JMenuItem mntmTrocarFrase = new JMenuItem("Trocar Frase");
+		mntmTrocarFrase.setIcon(new ImageIcon(Administrador.class.getResource("/view/img/trocar_frase.png")));
 		mntmTrocarFrase.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				

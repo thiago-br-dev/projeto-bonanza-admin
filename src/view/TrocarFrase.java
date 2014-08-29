@@ -1,6 +1,9 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -39,7 +42,11 @@ public class TrocarFrase extends JDialog {
 
 	public TrocarFrase() {
 		
-		setBounds(100, 100, 641, 294);
+		setTitle("Bonanza Supermecados - Trocar Frase");
+		setBounds(100, 100, 637, 294);
+		setResizable(false);
+		setModal(true);
+		setLocationRelativeTo(null);
 		
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -52,11 +59,13 @@ public class TrocarFrase extends JDialog {
 		textField.setColumns(10);
 		
 		JButton btnAlterar = new JButton("Alterar");
-		btnAlterar.setBounds(454, 188, 123, 34);
+		btnAlterar.setBounds(455, 188, 123, 34);
 		contentPanel.add(btnAlterar);
 		
-		JLabel lblAltereAquiA = new JLabel("Altere aqui a frase do painel.");
-		lblAltereAquiA.setBounds(47, 118, 530, 14);
+		JLabel lblAltereAquiA = new JLabel("Altere aqui a frase do seu painel de chamadas.");
+		lblAltereAquiA.setBounds(47, 115, 530, 25);
+		lblAltereAquiA.setForeground(Color.GRAY);
+		lblAltereAquiA.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		contentPanel.add(lblAltereAquiA);
 		
 		JLabel lblNewLabel = new JLabel("");
