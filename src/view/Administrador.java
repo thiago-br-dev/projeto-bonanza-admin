@@ -12,6 +12,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Administrador extends JFrame {
 
@@ -86,6 +88,16 @@ public class Administrador extends JFrame {
 
 		JMenu mnConfigurao = new JMenu("Configura\u00E7\u00E3o");
 		menuBar.add(mnConfigurao);
+		
+		JMenuItem mntmTrocarFrase = new JMenuItem("Trocar Frase");
+		mntmTrocarFrase.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				TrocarFrase.main(null);
+				
+			}
+		});
+		mnConfigurao.add(mntmTrocarFrase);
 
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
