@@ -11,7 +11,7 @@ import models.Preferencia;
 import util.ConnectionFactory;
 
 public class RepositorioPreferencia implements IRepositorioPreferencia {
-
+	// ---------------------------------------------------------------------------------
 	public boolean inserirPreferencia(Preferencia preferencia)
 			throws SQLException {
 		String sql = "insert into preferencia values (?,?,?)";
@@ -38,7 +38,7 @@ public class RepositorioPreferencia implements IRepositorioPreferencia {
 		}
 
 	}
-
+	// ---------------------------------------------------------------------------------
 	public boolean removerPreferencia(Preferencia preferencia)
 			throws SQLException {
 		String sql = "DELETE FROM prefencia WHERE id=?";
@@ -60,7 +60,7 @@ public class RepositorioPreferencia implements IRepositorioPreferencia {
 			return false;
 		}
 	}
-
+	// ---------------------------------------------------------------------------------
 	public boolean atualizarPreferencia(Preferencia preferencia)
 			throws SQLException {
 
@@ -86,6 +86,7 @@ public class RepositorioPreferencia implements IRepositorioPreferencia {
 			return false;
 		}
 	}
+	// ---------------------------------------------------------------------------------
 	public List<Preferencia> listarPreferencia() throws SQLException {
 		
 		ArrayList<Preferencia> preferenciaDB = new ArrayList<>();
@@ -116,5 +117,5 @@ public class RepositorioPreferencia implements IRepositorioPreferencia {
 
 		return preferenciaDB ;
 	}
-
+	// ---------------------------------------------------------------------------------
 }

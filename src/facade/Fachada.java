@@ -13,10 +13,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 import models.Administrador;
+import models.Caixa;
 import models.Preferencia;
 import repository.RepositorioAdministrador;
+import repository.RepositorioCaixa;
 import repository.RepositorioPreferencia;
 import controllers.ControllerAdministrador;
+import controllers.ControllerCaixa;
 import controllers.ControllerPreferencia;
 
 public class Fachada {
@@ -24,6 +27,7 @@ public class Fachada {
 	private static Fachada instancia;
 	private ControllerAdministrador administrador;
 	private ControllerPreferencia preferencia;
+	private ControllerCaixa caixa;
 
 	// Metodo para iniciar todos os Repositorios e controladores
 	// ---------------------------------------------------------------------
@@ -33,6 +37,9 @@ public class Fachada {
 
 		RepositorioPreferencia rp = new RepositorioPreferencia();
 		preferencia = new ControllerPreferencia(rp);
+		
+		RepositorioCaixa rc = new RepositorioCaixa();
+		caixa = new ControllerCaixa(rc);
 		
 	}
 
@@ -104,6 +111,32 @@ public class Fachada {
 	// ---------------------------------------------------------------------
 	public List<Preferencia> listarPreferencia() throws SQLException {
 		return this.preferencia.listar();
+	}
+
+	// ---------------------------------------------------------------------
+	// ---------------------------------------------------------------------
+	// ************************* caixa *******************************
+	// ---------------------------------------------------------------------
+	public boolean inserirCaixa(Caixa caixa)
+			throws SQLException {
+		return this.caixa.inserir(caixa);
+	}
+
+	// --------------------------------------------------------------------
+	public boolean removerCaixa(Caixa caixa)
+			throws SQLException {
+		return this.caixa.remover(caixa);
+	}
+
+	// ---------------------------------------------------------------------
+	public boolean atualizarCaixa(Caixa caixa)
+			throws SQLException {
+		return this.caixa.atualizar(caixa);
+	}
+
+	// ---------------------------------------------------------------------
+	public List<Caixa> listarCaixa() throws SQLException {
+		return this.caixa.listar();
 	}
 
 	// ---------------------------------------------------------------------

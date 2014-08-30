@@ -5,6 +5,9 @@ public class Caixa {
 	private int id;
 	private String caixa;
 	private String atendente;
+	private String dataHoraCadastro;
+	private int AdministradorId;
+	
 	public int getId() {
 		return id;
 	}
@@ -22,6 +25,18 @@ public class Caixa {
 	}
 	public void setAtendente(String atendente) {
 		this.atendente = atendente;
+	}
+	public String getDataHoraCadastro() {
+		return dataHoraCadastro;
+	}
+	public void setDataHoraCadastro(String dataHoraCadastro) {
+		this.dataHoraCadastro = dataHoraCadastro;
+	}
+	public int getAdministradorId() {
+		return AdministradorId;
+	}
+	public void setAdministradorId(int administradorId) {
+		AdministradorId = administradorId;
 	}
 	
 	

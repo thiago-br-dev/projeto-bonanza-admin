@@ -33,6 +33,7 @@
   create table preferencia(
   id int not null auto_increment primary key,
   texto varchar(100),
+  data_hora_modificacao varchar(20),
   administrador_id int,
   foreign key(administrador_id) references administrador(id)
   )engine = InnoDB DEFAULT CHARSET=utf8;

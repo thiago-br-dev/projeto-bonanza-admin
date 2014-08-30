@@ -6,6 +6,7 @@ public class Administrador {
 	private String nome;
 	private String login;
 	private String senha;
+	private String dataHoraCadastro;
 	
 	public int getId() {
 		return id;
@@ -30,6 +31,12 @@ public class Administrador {
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	public String getDataHoraCadastro() {
+		return dataHoraCadastro;
+	}
+	public void setDataHoraCadastro(String dataHoraCadastro) {
+		this.dataHoraCadastro = dataHoraCadastro;
 	}
 	
 
