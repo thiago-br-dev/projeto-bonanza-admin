@@ -2,12 +2,8 @@ package controllers;
 
 import java.sql.SQLException;
 import java.util.List;
-
-import models.Administrador;
 import models.Preferencia;
-import repository.IRepositorioAdministrador;
 import repository.IRepositorioPreferencia;
-import repository.RepositorioAdministrador;
 import repository.RepositorioPreferencia;
 
 public class ControllerPreferencia {
