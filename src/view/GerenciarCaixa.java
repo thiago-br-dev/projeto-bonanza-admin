@@ -33,7 +33,7 @@ public class GerenciarCaixa extends JDialog {
 	
 	private final JPanel contentPanel = new JPanel();
 	private JTextField numeroCaixa;
-	private JTextField textField;
+	private JTextField atendente;
 	
 	static JTable tabelaDeResultados;
 	JScrollPane scrollTabela;
@@ -134,14 +134,14 @@ public class GerenciarCaixa extends JDialog {
 		contentPanel.add(numeroCaixa);
 		numeroCaixa.setColumns(10);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(391, 300, 308, 35);
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		textField.setBorder(BorderFactory.createCompoundBorder(
-				textField.getBorder(),
+		atendente = new JTextField();
+		atendente.setColumns(10);
+		atendente.setBounds(391, 300, 308, 35);
+		atendente.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		atendente.setBorder(BorderFactory.createCompoundBorder(
+				atendente.getBorder(),
 				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-		contentPanel.add(textField);
+		contentPanel.add(atendente);
 		
 		JButton btnNewButton = new JButton("Adicionar Caixa");
 		btnNewButton.setBounds(557, 346, 143, 35);
