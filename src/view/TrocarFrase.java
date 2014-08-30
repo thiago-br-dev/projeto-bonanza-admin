@@ -79,7 +79,7 @@ public class TrocarFrase extends JDialog {
 
 		try {
 			preferencias = (ArrayList<Preferencia>) fachada.listarPreferencia();
-			if (!preferencias.equals(null)) {
+			if (preferencias.size() != 0) {
 
 				textField.setText(preferencias.get(0).getTexto().toString());
 
@@ -100,7 +100,7 @@ public class TrocarFrase extends JDialog {
 				try {
 					preferencias = (ArrayList<Preferencia>) fachada
 							.listarPreferencia();
-					if (!preferencias.equals(null)) {
+					if (preferencias.size() != 0) {
 
 						
 						//textField.setText(preferencias.get(0).getTexto()
@@ -108,11 +108,13 @@ public class TrocarFrase extends JDialog {
 						Preferencia preferencia = new Preferencia();
 						String texto = textField.getText().toString();
 						preferencia.setTexto(texto);
+						preferencia.setId(preferencias.get(0).getId());
 						
 						if (fachada.atualizarPreferencia(preferencia)) {
 							JOptionPane.showMessageDialog(null,
 									"Frase alterada com Sucesso!");
 						} else {
+							System.out.println("fudeu");
 							new SQLException();
 						}
 
@@ -124,10 +126,11 @@ public class TrocarFrase extends JDialog {
 						String texto = textField.getText().toString();
 						preferencia.setTexto(texto);
 
-						if (fachada.inserirPrefenrencia(preferencia)) {
+						if (fachada.inserirPreferencia(preferencia)) {
 							JOptionPane.showMessageDialog(null,
 									"Frase Cadastrada com Sucesso!");
 						} else {
+							System.out.println("fudeu2");
 							new SQLException();
 						}
 

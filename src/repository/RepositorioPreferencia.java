@@ -14,7 +14,7 @@ public class RepositorioPreferencia implements IRepositorioPreferencia {
 	// ---------------------------------------------------------------------------------
 	public boolean inserirPreferencia(Preferencia preferencia)
 			throws SQLException {
-		String sql = "insert into preferencia values (?,?,?)";
+		String sql = "insert into preferencia values (?,?,?,?)";
 
 		try {
 			
@@ -23,10 +23,10 @@ public class RepositorioPreferencia implements IRepositorioPreferencia {
 
 	PreparedStatement stm1 = (PreparedStatement) conIntranet
 			.prepareStatement(sql);
-
-		stm1.setInt(1, preferencia.getId());
+	    stm1.setInt(1, 0);
 		stm1.setString(2, preferencia.getTexto());
-		stm1.setInt(3, preferencia.getAdministradorId());
+		stm1.setString(3, preferencia.getDataHoraModificacao());
+		stm1.setInt(4, preferencia.getAdministradorId());
 		stm1.execute();
 		stm1.close();
 		conIntranet.close();
@@ -64,8 +64,7 @@ public class RepositorioPreferencia implements IRepositorioPreferencia {
 	public boolean atualizarPreferencia(Preferencia preferencia)
 			throws SQLException {
 
-		String sql = "UPDATE preferencia SET "
-				+ "texto=?, data_hora_modificacao=? WHERE id=?";
+		String sql = "UPDATE preferencia SET texto=?, data_hora_modificacao=?, administrador_id=? WHERE id=?";
 
 		try {
 			Connection conIntranet = new ConnectionFactory()
@@ -77,12 +76,14 @@ public class RepositorioPreferencia implements IRepositorioPreferencia {
 
 		stm1.setString(1, preferencia.getTexto());
 		stm1.setString(2, preferencia.getDataHoraModificacao());
-		stm1.setInt(3, preferencia.getId());
+		stm1.setInt(3, preferencia.getAdministradorId());
+		stm1.setInt(4, preferencia.getId());
 		stm1.execute();
 		stm1.close();
 		conIntranet.close();
 		return true;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return false;
 		}
 	}

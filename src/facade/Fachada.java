@@ -91,7 +91,7 @@ public class Fachada {
 	// ---------------------------------------------------------------------
 	// ************************* Preferencia *******************************
 	// ---------------------------------------------------------------------
-	public boolean inserirPrefenrencia(Preferencia preferencia)
+	public boolean inserirPreferencia(Preferencia preferencia)
 			throws SQLException {
 		return this.preferencia.inserir(preferencia);
 	}
