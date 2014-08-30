@@ -20,10 +20,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JTextField;
+import java.awt.Toolkit;
 
 public class Login extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	
 	private JPanel contentPane;
 	private JTextField campoLogin;
 	private JTextField campoSenha;
@@ -57,12 +59,14 @@ public class Login extends JFrame {
 	}
 
 	public Login() {
-
+		
 		setResizable(false);
-		setTitle("BONANZA SUPERMECADOS - LOGIN");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/view/img/icon_screen.png")));
+		setTitle("Realizando Login (administrador) - Bonanza Supermercados");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 698, 472);
 		setLocationRelativeTo(null);
+		
 		getContentPane().setLayout(new BorderLayout());
 
 		contentPane = new JPanel();
@@ -117,6 +121,8 @@ public class Login extends JFrame {
 
 					if (arg0.getKeyCode() == KeyEvent.VK_ESCAPE) {
 
+						System.exit(0);
+						
 					}
 
 					else {
@@ -137,6 +143,12 @@ public class Login extends JFrame {
 				else if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
 
 					validarLogin();
+					
+				}
+				
+				else if (arg0.getKeyCode() == KeyEvent.VK_ESCAPE) {
+
+					System.exit(0);
 					
 				}
 
@@ -168,6 +180,8 @@ public class Login extends JFrame {
 
 					if (arg0.getKeyCode() == KeyEvent.VK_ESCAPE) {
 
+						System.exit(0);
+						
 					}
 
 					else {
@@ -188,6 +202,12 @@ public class Login extends JFrame {
 				else if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
 
 					validarLogin();
+					
+				}
+				
+				else if (arg0.getKeyCode() == KeyEvent.VK_ESCAPE) {
+
+					System.exit(0);
 					
 				}
 
@@ -225,15 +245,21 @@ public class Login extends JFrame {
 		
 		if (campoLogin.getText().trim().isEmpty() | campoLogin.getText().equals("Digite seu Login")) {
 			
-			JOptionPane.showMessageDialog(null, "O campo de login está vazio. Digite algo e tente novamente.", "Bonanza Supermecados", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "O campo de login está vazio. Digite algo e tente novamente.", "Ops, um erro foi encontrado !", JOptionPane.ERROR_MESSAGE);
 			campoLogin.requestFocus();
 			
 		}
 		
 		else if (campoSenha.getText().trim().isEmpty() | campoSenha.getText().equals("Senha")) {
 			
-			JOptionPane.showMessageDialog(null, "O campo de senha está vazio. Digite algo e tente novamente.", "Bonanza Supermecados", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "O campo de senha está vazio. Digite algo e tente novamente.", "Ops, um erro foi encontrado !", JOptionPane.ERROR_MESSAGE);
 			campoSenha.requestFocus();
+			
+		}
+		
+		else {
+			
+			// Método que verifica no banco de o login está válido.
 			
 		}
 		

@@ -88,10 +88,11 @@ public class Administrador extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
-		JMenu mnPrincipal = new JMenu("Principal");
+		JMenu mnPrincipal = new JMenu("In\u00EDcio");
 		menuBar.add(mnPrincipal);
 		
 		JMenuItem mntmFinalizarSesso = new JMenuItem("Logoff");
+		mntmFinalizarSesso.setIcon(new ImageIcon(Administrador.class.getResource("/view/img/logoff.png")));
 		mntmFinalizarSesso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -99,24 +100,20 @@ public class Administrador extends JFrame {
 			}
 		});
 		mnPrincipal.add(mntmFinalizarSesso);
-		
-		JMenuItem mntmSair = new JMenuItem("Fechar Programa");
-		mntmSair.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			System.exit(0);
-			}
-		});
-		mnPrincipal.add(mntmSair);
 
-		JMenu mnRelatrios = new JMenu("Relat\u00F3rios");
+		JMenu mnRelatrios = new JMenu("Gerenciamento");
 		menuBar.add(mnRelatrios);
 		
-		JMenuItem mntmGerarNovo = new JMenuItem("Gerar Novo");
+		JMenuItem mntmGerarNovo = new JMenuItem("Gerar Relat\u00F3rios");
 		mntmGerarNovo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				GerarRelatorio.main(null);
 			}
 		});
+		
+		JMenuItem mntmMeusCaixas = new JMenuItem("Meus Caixas");
+		mntmMeusCaixas.setIcon(new ImageIcon(Administrador.class.getResource("/view/img/novo_caixa.png")));
+		mnRelatrios.add(mntmMeusCaixas);
 		mntmGerarNovo.setIcon(new ImageIcon(Administrador.class.getResource("/view/img/gerar_relatorio.png")));
 		mnRelatrios.add(mntmGerarNovo);
 
