@@ -21,7 +21,7 @@ public class CadastroAdministrador extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	private JLabel erro;
+	private JLabel erro, fundoMensagemErro, fundoMensagemSalvo, sucesso;
 	private JTextField campoNome;
 	private JTextField campoLogin;
 	private JTextField campoConfirmarSenha;
@@ -51,7 +51,7 @@ public class CadastroAdministrador extends JDialog {
 	public CadastroAdministrador() {
 		
 		setTitle("Cadastro de Administrador - Bonanza Supermercados");
-		setBounds(100, 100, 638, 331);
+		setBounds(100, 100, 638, 356);
 		setResizable(false);
 		setModal(true);
 		setLocationRelativeTo(null);
@@ -62,7 +62,7 @@ public class CadastroAdministrador extends JDialog {
 		contentPanel.setLayout(null);
 		
 		campoNome = new JTextField();
-		campoNome.setBounds(35, 149, 561, 29);
+		campoNome.setBounds(34, 171, 561, 29);
 		campoNome.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		campoNome.setColumns(10);
 		
@@ -75,40 +75,40 @@ public class CadastroAdministrador extends JDialog {
 		JLabel nome = new JLabel("Nome Completo");
 		nome.setForeground(Color.DARK_GRAY);
 		nome.setFont(new Font("Cambria", Font.PLAIN, 17));
-		nome.setBounds(35, 122, 117, 22);
+		nome.setBounds(34, 144, 117, 22);
 		contentPanel.add(nome);
 		
 		JLabel lblLogin = new JLabel("Login");
 		lblLogin.setForeground(Color.DARK_GRAY);
 		lblLogin.setFont(new Font("Cambria", Font.PLAIN, 17));
-		lblLogin.setBounds(35, 185, 40, 22);
+		lblLogin.setBounds(34, 207, 40, 22);
 		contentPanel.add(lblLogin);
 		
 		campoLogin = new JTextField();
 		campoLogin.setColumns(10);
-		campoLogin.setBounds(35, 212, 189, 29);
+		campoLogin.setBounds(34, 234, 189, 29);
 		contentPanel.add(campoLogin);
 		
 		JLabel lblConfirmarSenha = new JLabel("Confirmar Senha");
 		lblConfirmarSenha.setForeground(Color.DARK_GRAY);
 		lblConfirmarSenha.setFont(new Font("Cambria", Font.PLAIN, 17));
-		lblConfirmarSenha.setBounds(420, 185, 176, 22);
+		lblConfirmarSenha.setBounds(419, 207, 176, 22);
 		contentPanel.add(lblConfirmarSenha);
 		
 		campoConfirmarSenha = new JTextField();
 		campoConfirmarSenha.setColumns(10);
-		campoConfirmarSenha.setBounds(420, 212, 176, 29);
+		campoConfirmarSenha.setBounds(419, 234, 176, 29);
 		contentPanel.add(campoConfirmarSenha);
 		
 		campoSenha = new JTextField();
 		campoSenha.setColumns(10);
-		campoSenha.setBounds(234, 212, 176, 29);
+		campoSenha.setBounds(233, 234, 176, 29);
 		contentPanel.add(campoSenha);
 		
 		JLabel lblSenha = new JLabel("Senha");
 		lblSenha.setForeground(Color.DARK_GRAY);
 		lblSenha.setFont(new Font("Cambria", Font.PLAIN, 17));
-		lblSenha.setBounds(234, 185, 47, 22);
+		lblSenha.setBounds(233, 207, 47, 22);
 		contentPanel.add(lblSenha);
 		
 		JButton botaoSalvar = new JButton("Salvar");
@@ -123,11 +123,11 @@ public class CadastroAdministrador extends JDialog {
 		
 		});
 		
-		botaoSalvar.setBounds(461, 252, 136, 30);
+		botaoSalvar.setBounds(460, 274, 136, 30);
 		contentPanel.add(botaoSalvar);
 		
 		JButton botaoCancelar = new JButton("Cancelar");
-		botaoCancelar.setBounds(315, 252, 136, 30);
+		botaoCancelar.setBounds(314, 274, 136, 30);
 		contentPanel.add(botaoCancelar);
 		
 		erro = new JLabel("Erro");
@@ -135,15 +135,30 @@ public class CadastroAdministrador extends JDialog {
 		erro.setForeground(Color.GRAY);
 		erro.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		erro.setVisible(false);
-		erro.setBounds(169, 87, 427, 24);
+		erro.setBounds(168, 97, 427, 24);
 		
 		contentPanel.add(erro);
 		
-		JLabel fundoMensagemErro = new JLabel("New label");
+		fundoMensagemErro = new JLabel("New label");
 		fundoMensagemErro.setIcon(new ImageIcon(CadastroAdministrador.class.getResource("/view/img/mensagem_erro.png")));
-		fundoMensagemErro.setBounds(168, 83, 428, 34);
+		fundoMensagemErro.setBounds(167, 93, 428, 34);
 		fundoMensagemErro.setVisible(false);
 		contentPanel.add(fundoMensagemErro);
+		
+		sucesso = new JLabel("Usuário cadastrado com sucesso.");
+		sucesso.setHorizontalAlignment(SwingConstants.CENTER);
+		sucesso.setForeground(Color.GRAY);
+		sucesso.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		sucesso.setVisible(false);
+		sucesso.setBounds(168, 97, 427, 24);
+		
+		contentPanel.add(sucesso);
+		
+		fundoMensagemSalvo = new JLabel("New label");
+		fundoMensagemSalvo.setIcon(new ImageIcon(CadastroAdministrador.class.getResource("/view/img/mensagem_erro.png")));
+		fundoMensagemSalvo.setBounds(167, 93, 428, 34);
+		fundoMensagemSalvo.setVisible(false);
+		contentPanel.add(fundoMensagemSalvo);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(0, 0, 633, 304);
@@ -153,6 +168,85 @@ public class CadastroAdministrador extends JDialog {
 	}
 	
 	public void validarInformacoes() {
+		
+		if (campoNome.getText().trim().isEmpty()) {
+
+			fundoMensagemSalvo.setVisible(false);
+			sucesso.setVisible(false);
+
+			fundoMensagemErro.setVisible(true);
+
+			erro.setText("O campo (nome completo) ainda não foi preenchido.");
+			erro.setVisible(true);
+
+			campoNome.requestFocus();
+
+		}
+
+		else if (campoLogin.getText().trim().isEmpty()) {
+
+			fundoMensagemSalvo.setVisible(false);
+			sucesso.setVisible(false);
+
+			fundoMensagemErro.setVisible(true);
+
+			erro.setText("O campo (login) ainda não foi preenchido.");
+			erro.setVisible(true);
+
+			campoLogin.requestFocus();
+
+		}
+
+		else if (campoSenha.getText().trim().isEmpty()) {
+
+			fundoMensagemSalvo.setVisible(false);
+			sucesso.setVisible(false);
+
+			fundoMensagemErro.setVisible(true);
+
+			erro.setText("O campo (senha) ainda não foi preenchido.");
+			erro.setVisible(true);
+
+			campoSenha.requestFocus();
+
+		}
+
+		else if (campoConfirmarSenha.getText().trim().isEmpty()) {
+
+			fundoMensagemSalvo.setVisible(false);
+			sucesso.setVisible(false);
+
+			fundoMensagemErro.setVisible(true);
+
+			erro.setText("O campo (confirmar senha) ainda não foi preenchido.");
+			erro.setVisible(true);
+
+			campoConfirmarSenha.requestFocus();
+
+		}
+
+		else if (!(campoSenha.getText().equals(campoConfirmarSenha.getText()))) {
+
+			fundoMensagemSalvo.setVisible(false);
+			sucesso.setVisible(false);
+
+			fundoMensagemErro.setVisible(true);
+
+			erro.setText("Campos (senha e confirmar senha) não estão iguais.");
+			erro.setVisible(true);
+
+			campoSenha.setText("");
+			campoConfirmarSenha.setText("");
+
+			campoSenha.requestFocus();
+
+		}
+		
+		else {
+			
+			
+			
+		}
 		
 	}
 
