@@ -1,15 +1,19 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
 
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
+import javax.swing.BorderFactory;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.JComboBox;
 
@@ -25,6 +29,7 @@ public class GerarRelatorio extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JFormattedTextField dataInicial;
 	private JFormattedTextField dataFinal;
+	JLabel sucesso, fundoMensagemSalvo;
 
 	public static void main(String[] args) {
 		
@@ -49,8 +54,8 @@ public class GerarRelatorio extends JDialog {
 
 	public GerarRelatorio() {
 		
-		setTitle("Bonanza Supermecados - Gerar Relatório");
-		setBounds(100, 100, 637, 294);
+		setTitle("Gerar Relat\u00F3rios - Bonanza Supermecados");
+		setBounds(100, 100, 637, 279);
 		setResizable(false);
 		setModal(true);
 		setLocationRelativeTo(null);
@@ -61,29 +66,57 @@ public class GerarRelatorio extends JDialog {
 		contentPanel.setLayout(null);
 		
 		dataInicial = new JFormattedTextField(setMascara("##/##/####"));
-		dataInicial.setBounds(47, 143, 175, 34);
+		dataInicial.setBounds(37, 140, 179, 34);
 		contentPanel.add(dataInicial);
+		dataInicial.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		dataInicial.setColumns(10);
 		
+		dataInicial.setBorder(BorderFactory.createCompoundBorder(
+				dataInicial.getBorder(),
+				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+		
 		dataFinal = new JFormattedTextField(setMascara("##/##/####"));
+		dataFinal.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		dataFinal.setColumns(10);
-		dataFinal.setBounds(232, 143, 175, 34);
+		
+		dataFinal.setBorder(BorderFactory.createCompoundBorder(
+				dataFinal.getBorder(),
+				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+		dataFinal.setBounds(226, 140, 179, 34);
 		contentPanel.add(dataFinal);
 		
 		JButton btnAlterar = new JButton("Exportar Relatório");
 		btnAlterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				
+				
 			}
 		});
-		btnAlterar.setBounds(455, 188, 123, 34);
+		btnAlterar.setBounds(415, 184, 180, 35);
 		contentPanel.add(btnAlterar);
 		
 		JComboBox<String> comboBox = new JComboBox<String>();
-		comboBox.setBounds(417, 143, 161, 34);
+		comboBox.setBounds(415, 140, 179, 33);
 		contentPanel.add(comboBox);
 		
+		sucesso = new JLabel("Usuário cadastrado com sucesso.");
+		sucesso.setHorizontalAlignment(SwingConstants.CENTER);
+		sucesso.setForeground(Color.GRAY);
+		sucesso.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		sucesso.setVisible(false);
+		sucesso.setBounds(166, 90, 427, 24);
+		
+		contentPanel.add(sucesso);
+		
+		fundoMensagemSalvo = new JLabel("New label");
+		fundoMensagemSalvo.setIcon(new ImageIcon(CadastroAdministrador.class.getResource("/view/img/mensagem_sucesso.png")));
+		fundoMensagemSalvo.setBounds(165, 86, 428, 34);
+		fundoMensagemSalvo.setVisible(false);
+		contentPanel.add(fundoMensagemSalvo);
+		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setBounds(0, 0, 633, 263);
+		lblNewLabel.setBounds(0, 0, 633, 251);
 		lblNewLabel.setIcon(new ImageIcon(TrocarFrase.class.getResource("/view/img/gerar_relatorio.jpg")));
 		contentPanel.add(lblNewLabel);
 		

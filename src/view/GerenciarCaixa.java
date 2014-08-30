@@ -5,24 +5,20 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 import javax.swing.UIManager;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import javax.swing.JTextField;
 import javax.swing.JButton;
 
 public class GerenciarCaixa extends JDialog {
@@ -32,11 +28,10 @@ public class GerenciarCaixa extends JDialog {
 	static String[] colunas = new String[] { "Código", "Atendente" };
 	
 	private final JPanel contentPanel = new JPanel();
-	private JTextField numeroCaixa;
-	private JTextField atendente;
 	
 	static JTable tabelaDeResultados;
 	JScrollPane scrollTabela;
+	JLabel sucesso, fundoMensagemSalvo;
 
 	public static void main(String[] args) {
 		
@@ -62,7 +57,7 @@ public class GerenciarCaixa extends JDialog {
 	public GerenciarCaixa() {
 		
 		setTitle("Gerenciamento de Caixas - Bonanza Supermercados");
-		setBounds(100, 100, 739, 441);
+		setBounds(100, 100, 739, 350);
 		setResizable(false);
 		setModal(true);
 		setLocationRelativeTo(null);
@@ -73,7 +68,7 @@ public class GerenciarCaixa extends JDialog {
 		contentPanel.setLayout(null);
 		
 		JPanel painelTabela = new JPanel();
-		painelTabela.setBounds(26, 156, 317, 114);
+		painelTabela.setBounds(27, 135, 674, 114);
 		contentPanel.add(painelTabela);
 		painelTabela.setLayout(new BorderLayout());
 		
@@ -108,9 +103,9 @@ public class GerenciarCaixa extends JDialog {
 		});
 
 		tabelaDeResultados.getColumnModel().getColumn(0)
-				.setPreferredWidth(50);
+				.setPreferredWidth(100);
 		tabelaDeResultados.getColumnModel().getColumn(1)
-				.setPreferredWidth(300);
+				.setPreferredWidth(600);
 		
 		tabelaDeResultados.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		SetRowHight(tabelaDeResultados);
@@ -124,44 +119,24 @@ public class GerenciarCaixa extends JDialog {
 		scrollTabela = new JScrollPane(tabelaDeResultados);
 		painelTabela.add(scrollTabela);
 		
-		numeroCaixa = new JTextField();
-		numeroCaixa.setBounds(391, 221, 308, 35);
-		numeroCaixa.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		numeroCaixa.setBorder(BorderFactory.createCompoundBorder(
-				numeroCaixa.getBorder(),
-				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-		
-		contentPanel.add(numeroCaixa);
-		numeroCaixa.setColumns(10);
-		
-		atendente = new JTextField();
-		atendente.setColumns(10);
-		atendente.setBounds(391, 300, 308, 35);
-		atendente.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		atendente.setBorder(BorderFactory.createCompoundBorder(
-				atendente.getBorder(),
-				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-		contentPanel.add(atendente);
-		
-		JButton btnNewButton = new JButton("Adicionar Caixa");
-		btnNewButton.setBounds(557, 346, 143, 35);
-		contentPanel.add(btnNewButton);
-		
-		JLabel lblNmero = new JLabel("N\u00FAmero do Caixa");
-		lblNmero.setBounds(391, 188, 124, 22);
-		lblNmero.setForeground(Color.DARK_GRAY);
-		lblNmero.setFont(new Font("Cambria", Font.PLAIN, 17));
-		contentPanel.add(lblNmero);
-		
-		JLabel lblAtendenteopcional = new JLabel("Atendente (este campo \u00E9 opcional)");
-		lblAtendenteopcional.setForeground(Color.DARK_GRAY);
-		lblAtendenteopcional.setFont(new Font("Cambria", Font.PLAIN, 17));
-		lblAtendenteopcional.setBounds(391, 267, 308, 22);
-		contentPanel.add(lblAtendenteopcional);
-		
 		JButton btnRemoverCaixa = new JButton("Remover Caixa");
-		btnRemoverCaixa.setBounds(201, 281, 143, 35);
+		btnRemoverCaixa.setBounds(559, 260, 143, 35);
 		contentPanel.add(btnRemoverCaixa);
+		
+		sucesso = new JLabel("Usuário cadastrado com sucesso.");
+		sucesso.setHorizontalAlignment(SwingConstants.CENTER);
+		sucesso.setForeground(Color.GRAY);
+		sucesso.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		sucesso.setVisible(false);
+		sucesso.setBounds(275, 89, 427, 24);
+		
+		contentPanel.add(sucesso);
+		
+		fundoMensagemSalvo = new JLabel("New label");
+		fundoMensagemSalvo.setIcon(new ImageIcon(CadastroAdministrador.class.getResource("/view/img/mensagem_sucesso.png")));
+		fundoMensagemSalvo.setBounds(274, 85, 428, 34);
+		fundoMensagemSalvo.setVisible(false);
+		contentPanel.add(fundoMensagemSalvo);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(0, 0, 745, 443);

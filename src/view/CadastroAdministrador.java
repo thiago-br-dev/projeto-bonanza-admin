@@ -6,6 +6,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
@@ -29,8 +30,8 @@ public class CadastroAdministrador extends JDialog {
 	private JLabel erro, fundoMensagemErro, fundoMensagemSalvo, sucesso;
 	private JTextField campoNome;
 	private JTextField campoLogin;
-	private JTextField campoConfirmarSenha;
-	private JTextField campoSenha;
+	private JPasswordField campoConfirmarSenha;
+	private JPasswordField campoSenha;
 	
 	Fachada fachada;
 
@@ -92,7 +93,13 @@ public class CadastroAdministrador extends JDialog {
 		contentPanel.add(lblLogin);
 		
 		campoLogin = new JTextField();
+		campoLogin.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		campoLogin.setColumns(10);
+		
+		campoLogin.setBorder(BorderFactory.createCompoundBorder(
+				campoLogin.getBorder(),
+				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+		
 		campoLogin.setBounds(33, 228, 189, 29);
 		contentPanel.add(campoLogin);
 		
@@ -102,13 +109,25 @@ public class CadastroAdministrador extends JDialog {
 		lblConfirmarSenha.setBounds(418, 201, 176, 22);
 		contentPanel.add(lblConfirmarSenha);
 		
-		campoConfirmarSenha = new JTextField();
+		campoConfirmarSenha = new JPasswordField();
+		campoConfirmarSenha.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		campoConfirmarSenha.setColumns(10);
+		
+		campoConfirmarSenha.setBorder(BorderFactory.createCompoundBorder(
+				campoConfirmarSenha.getBorder(),
+				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+		
 		campoConfirmarSenha.setBounds(418, 228, 176, 29);
 		contentPanel.add(campoConfirmarSenha);
 		
-		campoSenha = new JTextField();
+		campoSenha = new JPasswordField();
+		campoSenha.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		campoSenha.setColumns(10);
+		
+		campoSenha.setBorder(BorderFactory.createCompoundBorder(
+				campoSenha.getBorder(),
+				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+		
 		campoSenha.setBounds(232, 228, 176, 29);
 		contentPanel.add(campoSenha);
 		
@@ -173,12 +192,13 @@ public class CadastroAdministrador extends JDialog {
 		contentPanel.add(fundoMensagemSalvo);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setBounds(0, 0, 633, 304);
+		lblNewLabel.setBounds(0, 0, 633, 349);
 		lblNewLabel.setIcon(new ImageIcon(CadastroAdministrador.class.getResource("/view/img/novo_administrador.jpg")));
 		contentPanel.add(lblNewLabel);
 		
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void validarInformacoes() {
 		
 		if (campoNome.getText().trim().isEmpty()) {

@@ -52,7 +52,7 @@ public class TrocarFrase extends JDialog {
 	public TrocarFrase() {
 
 		setTitle("Alterar frase do Painel - Bonanza Supermercados");
-		setBounds(100, 100, 637, 278);
+		setBounds(100, 100, 637, 270);
 		setResizable(false);
 		setModal(true);
 		setLocationRelativeTo(null);
@@ -63,7 +63,7 @@ public class TrocarFrase extends JDialog {
 		contentPanel.setLayout(null);
 
 		textField = new JTextField();
-		textField.setBounds(47, 143, 530, 34);
+		textField.setBounds(28, 143, 573, 29);
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		textField.setBorder(BorderFactory.createCompoundBorder(
 				textField.getBorder(),
@@ -115,13 +115,13 @@ public class TrocarFrase extends JDialog {
 			
 		});
 		
-		btnAlterar.setBounds(455, 188, 123, 34);
+		btnAlterar.setBounds(479, 183, 123, 30);
 		contentPanel.add(btnAlterar);
 
 		JLabel lblAltereAquiA = new JLabel(
 				"Altere aqui a frase do seu painel de atendimento.");
 		
-		lblAltereAquiA.setBounds(47, 115, 530, 25);
+		lblAltereAquiA.setBounds(28, 115, 530, 25);
 		lblAltereAquiA.setForeground(Color.GRAY);
 		lblAltereAquiA.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		contentPanel.add(lblAltereAquiA);
