@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -12,10 +13,14 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 
+import models.Administrador;
+import facade.Fachada;
+
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
 
 public class CadastroAdministrador extends JDialog {
 
@@ -26,6 +31,8 @@ public class CadastroAdministrador extends JDialog {
 	private JTextField campoLogin;
 	private JTextField campoConfirmarSenha;
 	private JTextField campoSenha;
+	
+	Fachada fachada;
 
 	public static void main(String[] args) {
 		
@@ -62,7 +69,7 @@ public class CadastroAdministrador extends JDialog {
 		contentPanel.setLayout(null);
 		
 		campoNome = new JTextField();
-		campoNome.setBounds(34, 171, 561, 29);
+		campoNome.setBounds(33, 165, 561, 29);
 		campoNome.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		campoNome.setColumns(10);
 		
@@ -75,40 +82,40 @@ public class CadastroAdministrador extends JDialog {
 		JLabel nome = new JLabel("Nome Completo");
 		nome.setForeground(Color.DARK_GRAY);
 		nome.setFont(new Font("Cambria", Font.PLAIN, 17));
-		nome.setBounds(34, 144, 117, 22);
+		nome.setBounds(33, 138, 117, 22);
 		contentPanel.add(nome);
 		
 		JLabel lblLogin = new JLabel("Login");
 		lblLogin.setForeground(Color.DARK_GRAY);
 		lblLogin.setFont(new Font("Cambria", Font.PLAIN, 17));
-		lblLogin.setBounds(34, 207, 40, 22);
+		lblLogin.setBounds(33, 201, 40, 22);
 		contentPanel.add(lblLogin);
 		
 		campoLogin = new JTextField();
 		campoLogin.setColumns(10);
-		campoLogin.setBounds(34, 234, 189, 29);
+		campoLogin.setBounds(33, 228, 189, 29);
 		contentPanel.add(campoLogin);
 		
 		JLabel lblConfirmarSenha = new JLabel("Confirmar Senha");
 		lblConfirmarSenha.setForeground(Color.DARK_GRAY);
 		lblConfirmarSenha.setFont(new Font("Cambria", Font.PLAIN, 17));
-		lblConfirmarSenha.setBounds(419, 207, 176, 22);
+		lblConfirmarSenha.setBounds(418, 201, 176, 22);
 		contentPanel.add(lblConfirmarSenha);
 		
 		campoConfirmarSenha = new JTextField();
 		campoConfirmarSenha.setColumns(10);
-		campoConfirmarSenha.setBounds(419, 234, 176, 29);
+		campoConfirmarSenha.setBounds(418, 228, 176, 29);
 		contentPanel.add(campoConfirmarSenha);
 		
 		campoSenha = new JTextField();
 		campoSenha.setColumns(10);
-		campoSenha.setBounds(233, 234, 176, 29);
+		campoSenha.setBounds(232, 228, 176, 29);
 		contentPanel.add(campoSenha);
 		
 		JLabel lblSenha = new JLabel("Senha");
 		lblSenha.setForeground(Color.DARK_GRAY);
 		lblSenha.setFont(new Font("Cambria", Font.PLAIN, 17));
-		lblSenha.setBounds(233, 207, 47, 22);
+		lblSenha.setBounds(232, 201, 47, 22);
 		contentPanel.add(lblSenha);
 		
 		JButton botaoSalvar = new JButton("Salvar");
@@ -123,11 +130,16 @@ public class CadastroAdministrador extends JDialog {
 		
 		});
 		
-		botaoSalvar.setBounds(460, 274, 136, 30);
+		botaoSalvar.setBounds(418, 274, 177, 30);
 		contentPanel.add(botaoSalvar);
 		
-		JButton botaoCancelar = new JButton("Cancelar");
-		botaoCancelar.setBounds(314, 274, 136, 30);
+		JButton botaoCancelar = new JButton("Cancelar Cadastro");
+		botaoCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
+		botaoCancelar.setBounds(232, 274, 177, 30);
 		contentPanel.add(botaoCancelar);
 		
 		erro = new JLabel("Erro");
@@ -155,7 +167,7 @@ public class CadastroAdministrador extends JDialog {
 		contentPanel.add(sucesso);
 		
 		fundoMensagemSalvo = new JLabel("New label");
-		fundoMensagemSalvo.setIcon(new ImageIcon(CadastroAdministrador.class.getResource("/view/img/mensagem_erro.png")));
+		fundoMensagemSalvo.setIcon(new ImageIcon(CadastroAdministrador.class.getResource("/view/img/mensagem_sucesso.png")));
 		fundoMensagemSalvo.setBounds(167, 93, 428, 34);
 		fundoMensagemSalvo.setVisible(false);
 		contentPanel.add(fundoMensagemSalvo);
@@ -244,7 +256,31 @@ public class CadastroAdministrador extends JDialog {
 		
 		else {
 			
+			Administrador administrador = new Administrador();
+			administrador.setNome(campoNome.getText());
+			administrador.setLogin(campoLogin.getText());
+			administrador.setSenha(campoSenha.getText());
 			
+			fachada = Fachada.getInstance();
+			try {
+				
+				fachada.inserirAdministrador(administrador);
+				
+				fundoMensagemErro.setVisible(false);
+				erro.setVisible(false);
+				
+				fundoMensagemSalvo.setVisible(true);
+				sucesso.setVisible(true);
+				
+				campoNome.setText("");
+				campoLogin.setText("");
+				campoSenha.setText("");
+				
+				campoNome.requestFocus();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			
 		}
 		

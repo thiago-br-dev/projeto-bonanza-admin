@@ -273,6 +273,7 @@ public class Login extends JFrame {
 				
 				if (fachada.verificarLogin(administrador)) {
 					
+					dispose();
 					view.Administrador.main(null);
 					
 				}
