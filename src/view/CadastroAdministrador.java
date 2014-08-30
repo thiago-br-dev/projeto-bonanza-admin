@@ -49,7 +49,7 @@ public class CadastroAdministrador extends JDialog {
 	public CadastroAdministrador() {
 		
 		setTitle("Cadastro de Administrador - Bonanza Supermercados");
-		setBounds(100, 100, 642, 331);
+		setBounds(100, 100, 638, 331);
 		setResizable(false);
 		setModal(true);
 		setLocationRelativeTo(null);
