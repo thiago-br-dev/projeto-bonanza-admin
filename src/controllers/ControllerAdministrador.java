@@ -48,4 +48,9 @@ public class ControllerAdministrador {
 	}
 
 	// -------------------------------------------------------------------
+	public boolean verificarLogin(Administrador administrador) throws SQLException {
+		return administradorRepositorio.verificarLogin(administrador);
+	}
+
+	// -------------------------------------------------------------------
 }
