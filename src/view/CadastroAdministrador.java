@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -10,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
+
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionListener;
@@ -61,8 +63,14 @@ public class CadastroAdministrador extends JDialog {
 		
 		campoNome = new JTextField();
 		campoNome.setBounds(35, 149, 561, 29);
-		contentPanel.add(campoNome);
+		campoNome.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		campoNome.setColumns(10);
+		
+		campoNome.setBorder(BorderFactory.createCompoundBorder(
+				campoNome.getBorder(),
+				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+		
+		contentPanel.add(campoNome);
 		
 		JLabel nome = new JLabel("Nome Completo");
 		nome.setForeground(Color.DARK_GRAY);
@@ -104,10 +112,17 @@ public class CadastroAdministrador extends JDialog {
 		contentPanel.add(lblSenha);
 		
 		JButton botaoSalvar = new JButton("Salvar");
+		
 		botaoSalvar.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent arg0) {
+				
+				validarInformacoes();
+				
 			}
+		
 		});
+		
 		botaoSalvar.setBounds(461, 252, 136, 30);
 		contentPanel.add(botaoSalvar);
 		
@@ -121,6 +136,7 @@ public class CadastroAdministrador extends JDialog {
 		erro.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		erro.setVisible(false);
 		erro.setBounds(169, 87, 427, 24);
+		
 		contentPanel.add(erro);
 		
 		JLabel fundoMensagemErro = new JLabel("New label");
@@ -133,5 +149,11 @@ public class CadastroAdministrador extends JDialog {
 		lblNewLabel.setBounds(0, 0, 633, 304);
 		lblNewLabel.setIcon(new ImageIcon(CadastroAdministrador.class.getResource("/view/img/novo_administrador.jpg")));
 		contentPanel.add(lblNewLabel);
+		
 	}
+	
+	public void validarInformacoes() {
+		
+	}
+
 }
