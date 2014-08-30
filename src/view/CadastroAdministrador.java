@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 
+import util.TamanhoMaximo;
 import models.Administrador;
 import facade.Fachada;
 
@@ -70,6 +71,7 @@ public class CadastroAdministrador extends JDialog {
 		contentPanel.setLayout(null);
 		
 		campoNome = new JTextField();
+		campoNome.setDocument(new TamanhoMaximo(100));
 		campoNome.setBounds(33, 165, 561, 29);
 		campoNome.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		campoNome.setColumns(10);
@@ -93,6 +95,7 @@ public class CadastroAdministrador extends JDialog {
 		contentPanel.add(lblLogin);
 		
 		campoLogin = new JTextField();
+		campoLogin.setDocument(new TamanhoMaximo(20));
 		campoLogin.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		campoLogin.setColumns(10);
 		
@@ -110,6 +113,7 @@ public class CadastroAdministrador extends JDialog {
 		contentPanel.add(lblConfirmarSenha);
 		
 		campoConfirmarSenha = new JPasswordField();
+		campoConfirmarSenha.setDocument(new TamanhoMaximo(20));
 		campoConfirmarSenha.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		campoConfirmarSenha.setColumns(10);
 		
@@ -121,6 +125,7 @@ public class CadastroAdministrador extends JDialog {
 		contentPanel.add(campoConfirmarSenha);
 		
 		campoSenha = new JPasswordField();
+		campoSenha.setDocument(new TamanhoMaximo(20));
 		campoSenha.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		campoSenha.setColumns(10);
 		

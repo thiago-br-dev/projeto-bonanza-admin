@@ -7,7 +7,7 @@
   
   create table administrador(
   id int not null auto_increment primary key,
-  nome varchar(50),
+  nome varchar(100),
   login varchar(20),
   senha varchar(20),
   data_hora_cadastro varchar(20)
