@@ -16,7 +16,7 @@
   create table caixa(
   id int not null auto_increment primary key,
   nunero_caixa varchar(4),
-  atendente varchar(20),
+  atendente varchar(100),
   data_hora_cadastro varchar(20),
   administrador_id int,
   foreign key(administrador_id) references administrador(id)
