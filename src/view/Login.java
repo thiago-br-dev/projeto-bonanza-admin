@@ -27,6 +27,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JTextField;
 
 import util.Sessao;
+import util.TamanhoMaximo;
 import facade.Fachada;
 
 import java.awt.Toolkit;
@@ -117,6 +118,7 @@ public class Login extends JFrame {
 
 		campoLogin = new JTextField();
 		campoLogin.setBounds(185, 131, 293, 34);
+		campoLogin.setDocument(new TamanhoMaximo(20));
 		campoLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		campoLogin.setBackground(new Color(240, 238, 240));
 		campoLogin.setBorder(new LineBorder(new Color(240, 238, 240)));
@@ -177,6 +179,7 @@ public class Login extends JFrame {
 
 		campoSenha = new JPasswordField();
 		campoSenha.setColumns(10);
+		campoSenha.setDocument(new TamanhoMaximo(20));
 		campoSenha.setBounds(185, 202, 293, 34);
 		campoSenha.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		campoSenha.setBackground(new Color(240, 238, 240));
