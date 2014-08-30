@@ -64,9 +64,8 @@ public class RepositorioPreferencia implements IRepositorioPreferencia {
 	public boolean atualizarPreferencia(Preferencia preferencia)
 			throws SQLException {
 
-		String sql = "UPDATE bem_segurado SET "
-				+ "chassi=?, placa=?, veiculo=?, ano_modelo=?, "
-				+ "RENAVAN=?, ano_fabricacao=? WHERE id=?";
+		String sql = "UPDATE preferencia SET "
+				+ "texto=?, data_hora_modificacao=? WHERE id=?";
 
 		try {
 			Connection conIntranet = new ConnectionFactory()
@@ -77,7 +76,8 @@ public class RepositorioPreferencia implements IRepositorioPreferencia {
 
 
 		stm1.setString(1, preferencia.getTexto());
-		stm1.setInt(2, preferencia.getId());
+		stm1.setString(2, preferencia.getDataHoraModificacao());
+		stm1.setInt(3, preferencia.getId());
 		stm1.execute();
 		stm1.close();
 		conIntranet.close();

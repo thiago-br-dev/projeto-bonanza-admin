@@ -1,10 +1,14 @@
 package controllers;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
 import models.Preferencia;
 import repository.IRepositorioPreferencia;
 import repository.RepositorioPreferencia;
+import util.Sessao;
 
 public class ControllerPreferencia {
 	private IRepositorioPreferencia preferenciaRepositorio;
@@ -27,7 +31,13 @@ public class ControllerPreferencia {
 
 	// -------------------------------------------------------------------
 	public boolean inserir(Preferencia preferencia) throws SQLException {
-		preferencia.setAdministradorId(1);
+		preferencia.setAdministradorId(Sessao.idAdministrador);
+
+		String dataSistema = new SimpleDateFormat("dd/MM/yyyy")
+				.format(new Date());
+		String horaSistema = new SimpleDateFormat("HH:mm").format(new Date());
+
+		preferencia.setDataHoraModificacao(dataSistema + " " + horaSistema);
 		return preferenciaRepositorio.inserirPreferencia(preferencia);
 	}
 
@@ -38,6 +48,12 @@ public class ControllerPreferencia {
 
 	// -------------------------------------------------------------------
 	public boolean atualizar(Preferencia preferencia) throws SQLException {
+
+		String dataSistema = new SimpleDateFormat("dd/MM/yyyy")
+				.format(new Date());
+		String horaSistema = new SimpleDateFormat("HH:mm").format(new Date());
+
+		preferencia.setDataHoraModificacao(dataSistema + " " + horaSistema);
 		return preferenciaRepositorio.atualizarPreferencia(preferencia);
 	}
 
