@@ -285,7 +285,7 @@ public class Login extends JFrame {
 				
 				administrador = fachada.verificarLogin(administrador);
 				
-				if (!administrador.equals(null)) {
+				if (administrador != null) {
 					
 					Sessao.idAdministrador = administrador.getId();
 					Sessao.nomeAdministrador = administrador.getNome();
