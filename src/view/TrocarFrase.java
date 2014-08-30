@@ -10,18 +10,26 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.UIManager;
 
+import facade.Fachada;
+import models.Preferencia;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class TrocarFrase extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textField;
+	private Fachada fachada;
+	private ArrayList<Preferencia> preferencias;
 
 	public static void main(String[] args) {
 
@@ -71,6 +79,40 @@ public class TrocarFrase extends JDialog {
 			public void actionPerformed(ActionEvent arg0) {
 
 				// Método para trocar frase do painel
+				fachada = Fachada.getInstance();
+				preferencias = new ArrayList<Preferencia>();
+				
+				try {
+					preferencias = (ArrayList<Preferencia>) fachada.listarPreferencia();
+					if (!preferencias.equals(null)){
+						
+						System.out.println("ddjfa");
+						textField.setText(preferencias.get(0).getTexto().toString());
+						
+					
+					}
+					else{
+						
+						Preferencia preferencia = new Preferencia();
+						String texto = textField.getText().toString();
+						preferencia.setTexto(texto);
+						
+						
+						if (fachada.inserirPrefenrencia(preferencia)){
+							JOptionPane.showMessageDialog(null, "Frase alterada com Sucesso!");	
+						}
+						else{
+							new SQLException();
+						}
+						
+					}
+					
+					
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				
+			
 
 			}
 			

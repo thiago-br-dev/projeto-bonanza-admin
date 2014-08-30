@@ -13,13 +13,17 @@ import java.sql.SQLException;
 import java.util.List;
 
 import models.Administrador;
+import models.Preferencia;
 import repository.RepositorioAdministrador;
+import repository.RepositorioPreferencia;
 import controllers.ControllerAdministrador;
+import controllers.ControllerPreferencia;
 
 public class Fachada {
 
 	private static Fachada instancia;
 	private ControllerAdministrador administrador;
+	private ControllerPreferencia preferencia;
 
 	// Metodo para iniciar todos os Repositorios e controladores
 	// ---------------------------------------------------------------------
@@ -27,6 +31,9 @@ public class Fachada {
 		RepositorioAdministrador ra = new RepositorioAdministrador();
 		administrador = new ControllerAdministrador(ra);
 
+		RepositorioPreferencia rp = new RepositorioPreferencia();
+		preferencia = new ControllerPreferencia(rp);
+		
 	}
 
 	// Contrutor da classe
@@ -75,6 +82,29 @@ public class Fachada {
 	}
 
 	// ---------------------------------------------------------------------
+	// ************************* Preferencia *******************************
+	// ---------------------------------------------------------------------
+	public boolean inserirPrefenrencia(Preferencia preferencia)
+			throws SQLException {
+		return this.preferencia.inserir(preferencia);
+	}
 
+	// --------------------------------------------------------------------
+	public boolean removerPreferencia(Preferencia prefencia)
+			throws SQLException {
+		return this.preferencia.remover(prefencia);
+	}
 
+	// ---------------------------------------------------------------------
+	public boolean atualizarPreferencia(Preferencia preferencia)
+			throws SQLException {
+		return this.preferencia.atualizar(preferencia);
+	}
+
+	// ---------------------------------------------------------------------
+	public List<Preferencia> listarPreferencia() throws SQLException {
+		return this.preferencia.listar();
+	}
+
+	// ---------------------------------------------------------------------
 }
