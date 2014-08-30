@@ -31,13 +31,13 @@ public class ControllerPreferencia {
 
 	// -------------------------------------------------------------------
 	public boolean inserir(Preferencia preferencia) throws SQLException {
-		preferencia.setAdministradorId(Sessao.idAdministrador);
-
+		
 		String dataSistema = new SimpleDateFormat("dd/MM/yyyy")
 				.format(new Date());
 		String horaSistema = new SimpleDateFormat("HH:mm").format(new Date());
 
 		preferencia.setDataHoraModificacao(dataSistema + " " + horaSistema);
+		preferencia.setAdministradorId(Sessao.idAdministrador);
 		return preferenciaRepositorio.inserirPreferencia(preferencia);
 	}
 
@@ -54,6 +54,7 @@ public class ControllerPreferencia {
 		String horaSistema = new SimpleDateFormat("HH:mm").format(new Date());
 
 		preferencia.setDataHoraModificacao(dataSistema + " " + horaSistema);
+		preferencia.setAdministradorId(Sessao.idAdministrador);
 		return preferenciaRepositorio.atualizarPreferencia(preferencia);
 	}
 
