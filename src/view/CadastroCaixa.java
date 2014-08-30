@@ -51,7 +51,7 @@ public class CadastroCaixa extends JDialog {
 	public CadastroCaixa() {
 		
 		setTitle("Cadastro de Caixa - Bonanza Supermercados");
-		setBounds(100, 100, 615, 290);
+		setBounds(100, 100, 615, 274);
 		setResizable(false);
 		setModal(true);
 		setLocationRelativeTo(null);
@@ -62,7 +62,7 @@ public class CadastroCaixa extends JDialog {
 		contentPanel.setLayout(null);
 		
 		campoNumero = new JTextField();
-		campoNumero.setBounds(32, 171, 93, 29);
+		campoNumero.setBounds(31, 157, 93, 29);
 		campoNumero.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		campoNumero.setColumns(10);
 		
@@ -75,7 +75,7 @@ public class CadastroCaixa extends JDialog {
 		JLabel numero = new JLabel("N\u00FAmero");
 		numero.setForeground(Color.DARK_GRAY);
 		numero.setFont(new Font("Cambria", Font.PLAIN, 17));
-		numero.setBounds(32, 144, 93, 22);
+		numero.setBounds(31, 130, 93, 22);
 		contentPanel.add(numero);
 		
 		JButton botaoSalvar = new JButton("Salvar");
@@ -90,7 +90,7 @@ public class CadastroCaixa extends JDialog {
 		
 		});
 		
-		botaoSalvar.setBounds(418, 211, 177, 30);
+		botaoSalvar.setBounds(405, 197, 177, 30);
 		contentPanel.add(botaoSalvar);
 		
 		JButton botaoCancelar = new JButton("Cancelar Cadastro");
@@ -99,7 +99,7 @@ public class CadastroCaixa extends JDialog {
 				dispose();
 			}
 		});
-		botaoCancelar.setBounds(232, 211, 177, 30);
+		botaoCancelar.setBounds(219, 197, 177, 30);
 		contentPanel.add(botaoCancelar);
 		
 		erro = new JLabel("Erro");
@@ -107,13 +107,13 @@ public class CadastroCaixa extends JDialog {
 		erro.setForeground(Color.GRAY);
 		erro.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		erro.setVisible(false);
-		erro.setBounds(168, 97, 427, 24);
+		erro.setBounds(154, 89, 427, 24);
 		
 		contentPanel.add(erro);
 		
 		fundoMensagemErro = new JLabel("New label");
 		fundoMensagemErro.setIcon(new ImageIcon(CadastroAdministrador.class.getResource("/view/img/mensagem_erro.png")));
-		fundoMensagemErro.setBounds(167, 93, 428, 34);
+		fundoMensagemErro.setBounds(153, 85, 428, 34);
 		fundoMensagemErro.setVisible(false);
 		contentPanel.add(fundoMensagemErro);
 		
@@ -122,20 +122,20 @@ public class CadastroCaixa extends JDialog {
 		sucesso.setForeground(Color.GRAY);
 		sucesso.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		sucesso.setVisible(false);
-		sucesso.setBounds(168, 97, 427, 24);
+		sucesso.setBounds(154, 89, 427, 24);
 		
 		contentPanel.add(sucesso);
 		
 		fundoMensagemSalvo = new JLabel("New label");
 		fundoMensagemSalvo.setIcon(new ImageIcon(CadastroAdministrador.class.getResource("/view/img/mensagem_sucesso.png")));
-		fundoMensagemSalvo.setBounds(167, 93, 428, 34);
+		fundoMensagemSalvo.setBounds(153, 85, 428, 34);
 		fundoMensagemSalvo.setVisible(false);
 		contentPanel.add(fundoMensagemSalvo);
 		
 		JLabel lblAtendentecampoOpcional = new JLabel("Atendente - (este campo \u00E9 opcional).");
 		lblAtendentecampoOpcional.setForeground(Color.DARK_GRAY);
 		lblAtendentecampoOpcional.setFont(new Font("Cambria", Font.PLAIN, 17));
-		lblAtendentecampoOpcional.setBounds(135, 144, 459, 22);
+		lblAtendentecampoOpcional.setBounds(134, 130, 459, 22);
 		contentPanel.add(lblAtendentecampoOpcional);
 		
 		textField = new JTextField();
@@ -144,7 +144,7 @@ public class CadastroCaixa extends JDialog {
 		textField.setBorder(BorderFactory.createCompoundBorder(
 						campoNumero.getBorder(),
 						BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-		textField.setBounds(135, 171, 459, 29);
+		textField.setBounds(134, 157, 447, 29);
 		contentPanel.add(textField);
 		
 		JLabel lblNewLabel = new JLabel("");

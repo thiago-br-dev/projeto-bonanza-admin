@@ -18,6 +18,7 @@ import javax.swing.ImageIcon;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class Administrador extends JFrame {
 
@@ -54,6 +55,7 @@ public class Administrador extends JFrame {
 	}
 
 	public Administrador() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Administrador.class.getResource("/view/img/icon_screen.png")));
 		
 		addComponentListener(new ComponentAdapter() {
 			
@@ -115,6 +117,7 @@ public class Administrador extends JFrame {
 		mnCadastros.add(mntmNovoCaixa);
 		
 		JMenuItem mntmNovoAdministrador = new JMenuItem("Novo Administrador");
+		mntmNovoAdministrador.setIcon(new ImageIcon(Administrador.class.getResource("/view/img/novo_administrador.png")));
 		mntmNovoAdministrador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				CadastroAdministrador.main(null);
@@ -138,9 +141,9 @@ public class Administrador extends JFrame {
 				GerenciarCaixa.main(null);
 			}
 		});
-		mntmMeusCaixas.setIcon(new ImageIcon(Administrador.class.getResource("/view/img/novo_caixa.png")));
+		mntmMeusCaixas.setIcon(new ImageIcon(Administrador.class.getResource("/view/img/gerenciar_caixa.png")));
 		mnRelatrios.add(mntmMeusCaixas);
-		mntmGerarNovo.setIcon(new ImageIcon(Administrador.class.getResource("/view/img/gerar_relatorio.png")));
+		mntmGerarNovo.setIcon(new ImageIcon(Administrador.class.getResource("/view/img/gerenciar_administrador.png")));
 		mnRelatrios.add(mntmGerarNovo);
 
 		JMenu mnConfigurao = new JMenu("Configura\u00E7\u00E3o");
@@ -161,6 +164,7 @@ public class Administrador extends JFrame {
 		menuBar.add(mnAjuda);
 		
 		JMenuItem mntmDesenvolvedores = new JMenuItem("Desenvolvedores");
+		mntmDesenvolvedores.setIcon(new ImageIcon(Administrador.class.getResource("/view/img/desenvolvedores.png")));
 		mnAjuda.add(mntmDesenvolvedores);
 
 		contentPane = new JPanel();
