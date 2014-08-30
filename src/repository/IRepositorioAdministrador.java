@@ -15,6 +15,6 @@ public interface IRepositorioAdministrador {
 	
 	List<Administrador> listarAdministrador() throws SQLException;
 	
-	boolean verificarLogin(Administrador administrador) throws SQLException;
+	Administrador verificarLogin(Administrador administrador) throws SQLException;
 	
 }

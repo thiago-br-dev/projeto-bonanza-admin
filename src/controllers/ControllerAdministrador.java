@@ -1,6 +1,8 @@
 package controllers;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import models.Administrador;
@@ -23,12 +25,19 @@ public class ControllerAdministrador {
 	}
 
 	// -------------------------------------------------------------------
-	public ControllerAdministrador(RepositorioAdministrador RepositorioAdministrador) {
+	public ControllerAdministrador(
+			RepositorioAdministrador RepositorioAdministrador) {
 		this.setAdministradorRepositorio(RepositorioAdministrador);
 	}
 
 	// -------------------------------------------------------------------
 	public boolean inserir(Administrador administrador) throws SQLException {
+		String dataSistema = new SimpleDateFormat("dd/MM/yyyy")
+				.format(new Date());
+		String horaSistema = new SimpleDateFormat("HH:mm").format(new Date());
+
+		administrador.setDataHoraCadastro(dataSistema + " " + horaSistema);
+
 		return administradorRepositorio.inserirAdministrador(administrador);
 	}
 
@@ -48,7 +57,8 @@ public class ControllerAdministrador {
 	}
 
 	// -------------------------------------------------------------------
-	public boolean verificarLogin(Administrador administrador) throws SQLException {
+	public Administrador verificarLogin(Administrador administrador)
+			throws SQLException {
 		return administradorRepositorio.verificarLogin(administrador);
 	}
 

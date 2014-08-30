@@ -84,7 +84,7 @@ public class Fachada {
 	}
 
 	// ---------------------------------------------------------------------
-	public boolean verificarLogin(Administrador administrador) throws SQLException {
+	public Administrador verificarLogin(Administrador administrador) throws SQLException {
 		return this.administrador.verificarLogin(administrador);
 	}
 

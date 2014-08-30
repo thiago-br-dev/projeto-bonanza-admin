@@ -1,14 +1,17 @@
 package controllers;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import models.Caixa;
 import repository.IRepositorioCaixa;
 import repository.RepositorioCaixa;
+import util.Sessao;
 
 public class ControllerCaixa {
-	
+
 	private IRepositorioCaixa caixaRepositorio;
 
 	// GETs e SETs do clienteRepositorio
@@ -17,8 +20,7 @@ public class ControllerCaixa {
 		return caixaRepositorio;
 	}
 
-	public void setCaixaRepositorio(
-			IRepositorioCaixa caixaRepositorio) {
+	public void setCaixaRepositorio(IRepositorioCaixa caixaRepositorio) {
 		this.caixaRepositorio = caixaRepositorio;
 	}
 
@@ -29,7 +31,13 @@ public class ControllerCaixa {
 
 	// -------------------------------------------------------------------
 	public boolean inserir(Caixa caixa) throws SQLException {
-		caixa.setAdministradorId(1);
+
+		String dataSistema = new SimpleDateFormat("dd/MM/yyyy")
+				.format(new Date());
+		String horaSistema = new SimpleDateFormat("HH:mm").format(new Date());
+
+		caixa.setDataHoraCadastro(dataSistema + " " + horaSistema);
+		caixa.setAdministradorId(Sessao.idAdministrador);
 		return caixaRepositorio.inserirCaixa(caixa);
 	}
 

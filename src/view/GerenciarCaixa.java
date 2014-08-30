@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -16,10 +17,18 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
+
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import javax.swing.JButton;
+
+import models.Caixa;
+import facade.Fachada;
 
 public class GerenciarCaixa extends JDialog {
 
@@ -32,6 +41,9 @@ public class GerenciarCaixa extends JDialog {
 	static JTable tabelaDeResultados;
 	JScrollPane scrollTabela;
 	JLabel sucesso, fundoMensagemSalvo;
+	
+	private Fachada fachada;
+	private List<Caixa> caixasBD;
 
 	public static void main(String[] args) {
 		
@@ -142,6 +154,19 @@ public class GerenciarCaixa extends JDialog {
 		lblNewLabel.setBounds(0, 0, 745, 443);
 		lblNewLabel.setIcon(new ImageIcon(GerenciarCaixa.class.getResource("/view/img/cadastrar_caixa.jpg")));
 		contentPanel.add(lblNewLabel);
+		
+		
+		// informacao do banco de dados
+		
+		fachada = Fachada.getInstance();
+		caixasBD = new ArrayList<Caixa>();
+		try {
+			caixasBD = fachada.listarCaixa();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	

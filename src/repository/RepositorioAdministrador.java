@@ -16,7 +16,7 @@ public class RepositorioAdministrador implements IRepositorioAdministrador {
 	public boolean inserirAdministrador(Administrador administrador)
 			throws SQLException {
 
-		String sql = "insert into bem_segurado values (?,?,?,?,?,?,?)";
+		String sql = "insert into administrador values (?,?,?,?,?)";
 
 		try {
 			
@@ -28,12 +28,17 @@ public class RepositorioAdministrador implements IRepositorioAdministrador {
 
 		stm1.setInt(1, administrador.getId());
 		stm1.setString(2, administrador.getNome());
+		stm1.setString(3, administrador.getLogin());
+		stm1.setString(4, administrador.getSenha());
+		stm1.setString(5, administrador.getDataHoraCadastro());
 		stm1.execute();
 		stm1.close();
 		conIntranet.close();
+		
 		return true;
 		
 		} catch (Exception e) {
+			e.printStackTrace();
 			return false;
 		}
 
@@ -127,9 +132,9 @@ public class RepositorioAdministrador implements IRepositorioAdministrador {
 		return AdministradorDB ;
 	}
 	// ---------------------------------------------------------------------------------
-	public boolean verificarLogin(Administrador administrador)
+	public Administrador verificarLogin(Administrador administrador)
 			throws SQLException {
-		String sql = "SELECT login, senha FROM administrador";
+		String sql = "SELECT * FROM administrador";
 
 		try {
 			Connection conIntranet = new ConnectionFactory()
@@ -144,9 +149,19 @@ public class RepositorioAdministrador implements IRepositorioAdministrador {
 
 				String loginBD = rs1.getString(1);
 				String senhaBD = rs1.getString(2);
-
-				if (loginBD.equals(administrador.getLogin()) && senhaBD.equals(administrador.getSenha())) {
-					return true;
+				
+				
+				Administrador adm = new Administrador();
+				adm.setId(rs1.getInt(1));
+				adm.setNome(rs1.getString(2));
+				adm.setLogin(rs1.getString(3));
+				adm.setSenha(rs1.getString(4));
+				adm.setDataHoraCadastro(rs1.getString(5));
+				
+				if (adm.getLogin().equals(administrador.getLogin()) && adm.getSenha().equals(administrador.getSenha())){
+					
+					
+					return adm;
 				}
 
 			}
@@ -155,9 +170,9 @@ public class RepositorioAdministrador implements IRepositorioAdministrador {
 			conIntranet.close();
 
 		} catch (Exception e) {
-			new SQLException();
+			e.printStackTrace();
 		}
 
-		return false;
+		return null;
 	}
 }

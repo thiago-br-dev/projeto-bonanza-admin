@@ -17,10 +17,15 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
-
 import javax.swing.JButton;
+
+import facade.Fachada;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GerenciarAdministrador extends JDialog {
 
@@ -31,6 +36,9 @@ public class GerenciarAdministrador extends JDialog {
 	static JTable tabelaDeResultados;
 	JScrollPane scrollTabela;
 	JLabel sucesso, fundoMensagemSalvo;
+	
+	private Fachada fachada;
+	private List<models.Administrador> administradoresBD;
 
 	public static void main(String[] args) {
 		
@@ -149,6 +157,20 @@ public class GerenciarAdministrador extends JDialog {
 		lblNewLabel.setIcon(new ImageIcon(GerenciarAdministrador.class.getResource("/view/img/gerenciar_administradores.jpg")));
 		contentPanel.add(lblNewLabel);
 		
+		
+		// informacao do banco de dados
+		
+		fachada = Fachada.getInstance();
+		administradoresBD = new ArrayList<models.Administrador>();
+		try {
+			administradoresBD = fachada.listarAdministrador();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
 	public void SetRowHight(JTable table) {
@@ -157,5 +179,8 @@ public class GerenciarAdministrador extends JDialog {
 		table.setRowHeight(height + 7);
 
 	}
+	
+
+	
 	
 }

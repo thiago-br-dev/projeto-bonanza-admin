@@ -51,6 +51,8 @@ public class TrocarFrase extends JDialog {
 
 	public TrocarFrase() {
 
+		fachada = Fachada.getInstance();
+
 		setTitle("Alterar frase do Painel - Bonanza Supermercados");
 		setBounds(100, 100, 637, 270);
 		setResizable(false);
@@ -71,56 +73,68 @@ public class TrocarFrase extends JDialog {
 		contentPanel.add(textField);
 		textField.setColumns(10);
 
+		// Listar frase caso ja esteja cadastrado na base de dados
+		// ---------------------------------------------------------------------------------------
+		preferencias = new ArrayList<Preferencia>();
+
+		try {
+			preferencias = (ArrayList<Preferencia>) fachada.listarPreferencia();
+			if (!preferencias.equals(null)) {
+
+				textField.setText(preferencias.get(0).getTexto().toString());
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		// ---------------------------------------------------------------------------------------
+
 		JButton btnAlterar = new JButton("Alterar Agora");
 		btnAlterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
 				// Método para trocar frase do painel
-				fachada = Fachada.getInstance();
+
 				preferencias = new ArrayList<Preferencia>();
-				
+
 				try {
-					preferencias = (ArrayList<Preferencia>) fachada.listarPreferencia();
-					if (!preferencias.equals(null)){
-						
+					preferencias = (ArrayList<Preferencia>) fachada
+							.listarPreferencia();
+					if (!preferencias.equals(null)) {
+
 						System.out.println("ddjfa");
-						textField.setText(preferencias.get(0).getTexto().toString());
-						
-					
-					}
-					else{
-						
+						textField.setText(preferencias.get(0).getTexto()
+								.toString());
+
+					} else {
+
 						Preferencia preferencia = new Preferencia();
 						String texto = textField.getText().toString();
 						preferencia.setTexto(texto);
-						
-						
-						if (fachada.inserirPrefenrencia(preferencia)){
-							JOptionPane.showMessageDialog(null, "Frase alterada com Sucesso!");	
-						}
-						else{
+
+						if (fachada.inserirPrefenrencia(preferencia)) {
+							JOptionPane.showMessageDialog(null,
+									"Frase alterada com Sucesso!");
+						} else {
 							new SQLException();
 						}
-						
+
 					}
-					
-					
+
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
-				
-			
 
 			}
-			
+
 		});
-		
+
 		btnAlterar.setBounds(479, 183, 123, 30);
 		contentPanel.add(btnAlterar);
 
 		JLabel lblAltereAquiA = new JLabel(
 				"Altere aqui a frase do seu painel de atendimento.");
-		
+
 		lblAltereAquiA.setBounds(28, 115, 530, 25);
 		lblAltereAquiA.setForeground(Color.GRAY);
 		lblAltereAquiA.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -128,12 +142,12 @@ public class TrocarFrase extends JDialog {
 
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(0, 0, 643, 251);
-		
+
 		lblNewLabel.setIcon(new ImageIcon(TrocarFrase.class
 				.getResource("/view/img/trocar_frase.jpg")));
-		
+
 		contentPanel.add(lblNewLabel);
 
 	}
-	
+
 }

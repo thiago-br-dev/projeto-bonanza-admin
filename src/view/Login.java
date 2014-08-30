@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.HeadlessException;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -17,14 +18,20 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.JTextField;
+
+import util.Sessao;
 import facade.Fachada;
+
 import java.awt.Toolkit;
 import java.sql.SQLException;
+
 import models.Administrador;
 
 public class Login extends JFrame {
@@ -273,8 +280,12 @@ public class Login extends JFrame {
 			
 			try {
 				
-				if (fachada.verificarLogin(administrador)) {
+				administrador = fachada.verificarLogin(administrador);
+				
+				if (!administrador.equals(null)) {
 					
+					Sessao.idAdministrador = administrador.getId();
+					Sessao.nomeAdministrador = administrador.getNome();
 					dispose();
 					view.Administrador.main(null);
 					

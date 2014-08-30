@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -11,11 +12,15 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
+
+import models.Caixa;
 import facade.Fachada;
+
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
 
 public class CadastroCaixa extends JDialog {
 
@@ -24,7 +29,7 @@ public class CadastroCaixa extends JDialog {
 	private JLabel erro, fundoMensagemErro, fundoMensagemSalvo, sucesso;
 	private JTextField campoNumero;
 	
-	Fachada fachada;
+	private Fachada fachada;
 	private JTextField textField;
 
 	public static void main(String[] args) {
@@ -173,6 +178,29 @@ public class CadastroCaixa extends JDialog {
 		else {
 			
 			// Método para salvar o novo caixa.
+			fachada = Fachada.getInstance();
+			
+			Caixa caixa = new Caixa();
+			
+			caixa.setCaixa(campoNumero.getText().toString());
+			caixa.setAtendente(textField.getText().toString());
+			
+			
+			try {
+				if (fachada.inserirCaixa(caixa)){
+					sucesso.setText("Caixa Cadastrado com Sucesso");
+					sucesso.setVisible(true);
+					
+				}else{
+					erro.setText("Ocorreu um Erro tente Novamente!");
+					erro.setVisible(true);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			
+			
 			
 		}
 		
