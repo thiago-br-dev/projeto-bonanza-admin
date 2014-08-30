@@ -100,18 +100,44 @@ public class Administrador extends JFrame {
 			}
 		});
 		mnPrincipal.add(mntmFinalizarSesso);
+		
+		JMenu mnCadastros = new JMenu("Cadastros");
+		menuBar.add(mnCadastros);
+		
+		JMenuItem mntmNovoCaixa = new JMenuItem("Novo Caixa");
+		mntmNovoCaixa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CadastroCaixa.main(null);
+				
+			}
+		});
+		mntmNovoCaixa.setIcon(new ImageIcon(Administrador.class.getResource("/view/img/novo_caixa.png")));
+		mnCadastros.add(mntmNovoCaixa);
+		
+		JMenuItem mntmNovoAdministrador = new JMenuItem("Novo Administrador");
+		mntmNovoAdministrador.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				CadastroAdministrador.main(null);
+			}
+		});
+		mnCadastros.add(mntmNovoAdministrador);
 
 		JMenu mnRelatrios = new JMenu("Gerenciamento");
 		menuBar.add(mnRelatrios);
 		
-		JMenuItem mntmGerarNovo = new JMenuItem("Gerar Relat\u00F3rios");
+		JMenuItem mntmGerarNovo = new JMenuItem("Gerenciar Administradores");
 		mntmGerarNovo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				GerarRelatorio.main(null);
+				GerenciarAdministrador.main(null);
 			}
 		});
 		
-		JMenuItem mntmMeusCaixas = new JMenuItem("Meus Caixas");
+		JMenuItem mntmMeusCaixas = new JMenuItem("Gerenciar Caixas");
+		mntmMeusCaixas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GerenciarCaixa.main(null);
+			}
+		});
 		mntmMeusCaixas.setIcon(new ImageIcon(Administrador.class.getResource("/view/img/novo_caixa.png")));
 		mnRelatrios.add(mntmMeusCaixas);
 		mntmGerarNovo.setIcon(new ImageIcon(Administrador.class.getResource("/view/img/gerar_relatorio.png")));
@@ -130,6 +156,12 @@ public class Administrador extends JFrame {
 			}
 		});
 		mnConfigurao.add(mntmTrocarFrase);
+		
+		JMenu mnAjuda = new JMenu("Ajuda");
+		menuBar.add(mnAjuda);
+		
+		JMenuItem mntmDesenvolvedores = new JMenuItem("Desenvolvedores");
+		mnAjuda.add(mntmDesenvolvedores);
 
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
