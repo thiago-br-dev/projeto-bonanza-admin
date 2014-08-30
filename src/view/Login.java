@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.HeadlessException;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -16,19 +15,14 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
-
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import javax.swing.JTextField;
-
 import facade.Fachada;
-
 import java.awt.Toolkit;
 import java.sql.SQLException;
-
 import models.Administrador;
 
 public class Login extends JFrame {
@@ -269,28 +263,42 @@ public class Login extends JFrame {
 		
 		else {
 			
-			// Método que verifica no banco de o login está válido.
 			fachada = Fachada.getInstance();
+			
 			Administrador administrador = new Administrador();
 			administrador.setLogin(campoLogin.getText());
 			administrador.setSenha(campoSenha.getText());
 			
 			try {
-				if (fachada.verificarLogin(administrador)){
+				
+				if (fachada.verificarLogin(administrador)) {
 					
 					view.Administrador.main(null);
 					
 				}
-				else{
-					JOptionPane.showMessageDialog(null, "Login ou senha incorreto. tente novamente.", "Ops, um erro foi encontrado !", JOptionPane.ERROR_MESSAGE);
-					campoLogin.setText("");;
-					campoSenha.setText("");;
+				
+				else {
+					
+					JOptionPane.showMessageDialog(null, "Dados incorretos (login ou senha). Verifique e tente novamente.", "Ops, um erro foi encontrado !", JOptionPane.ERROR_MESSAGE);
+					
+					campoLogin.setText("");
+					campoSenha.setText("");
 					campoLogin.requestFocus();
+					
 				}
-			} catch (HeadlessException e) {
+				
+			}
+			
+			catch (HeadlessException e) {
+				
 				e.printStackTrace();
-			} catch (SQLException e) {
+				
+			}
+			
+			catch (SQLException e) {
+				
 				e.printStackTrace();
+				
 			}
 			
 		}
