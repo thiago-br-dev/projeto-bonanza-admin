@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -18,6 +19,8 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 
 public class CadastroCaixa extends JDialog {
@@ -71,6 +74,27 @@ public class CadastroCaixa extends JDialog {
 		campoNumero.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		campoNumero.setColumns(10);
 
+		campoNumero.addKeyListener(new KeyAdapter() {
+
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+			
+				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
+					
+					validarInformacoes();
+					
+				}
+				
+				else if (arg0.getKeyCode() == KeyEvent.VK_ESCAPE) {
+					
+					dispose();
+					
+				}
+			
+			}
+			
+		});
+
 		campoNumero.setBorder(BorderFactory.createCompoundBorder(
 				campoNumero.getBorder(),
 				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
@@ -78,11 +102,11 @@ public class CadastroCaixa extends JDialog {
 		contentPanel.add(campoNumero);
 
 		JLabel numero = new JLabel("N\u00FAmero");
-		
+
 		numero.setForeground(Color.DARK_GRAY);
 		numero.setFont(new Font("Cambria", Font.PLAIN, 17));
 		numero.setBounds(31, 130, 93, 22);
-		
+
 		contentPanel.add(numero);
 
 		JButton botaoSalvar = new JButton("Salvar");
@@ -101,17 +125,17 @@ public class CadastroCaixa extends JDialog {
 		contentPanel.add(botaoSalvar);
 
 		JButton botaoCancelar = new JButton("Cancelar Cadastro");
-		
+
 		botaoCancelar.addActionListener(new ActionListener() {
-			
+
 			public void actionPerformed(ActionEvent arg0) {
-				
+
 				dispose();
-				
+
 			}
-			
+
 		});
-		
+
 		botaoCancelar.setBounds(219, 197, 177, 30);
 		contentPanel.add(botaoCancelar);
 
@@ -125,13 +149,13 @@ public class CadastroCaixa extends JDialog {
 		contentPanel.add(erro);
 
 		fundoMensagemErro = new JLabel("New label");
-		
+
 		fundoMensagemErro.setIcon(new ImageIcon(CadastroAdministrador.class
 				.getResource("/view/img/mensagem_erro.png")));
-		
+
 		fundoMensagemErro.setBounds(153, 85, 428, 34);
 		fundoMensagemErro.setVisible(false);
-		
+
 		contentPanel.add(fundoMensagemErro);
 
 		sucesso = new JLabel("Usuário cadastrado com sucesso.");
@@ -144,18 +168,18 @@ public class CadastroCaixa extends JDialog {
 		contentPanel.add(sucesso);
 
 		fundoMensagemSalvo = new JLabel("New label");
-		
+
 		fundoMensagemSalvo.setIcon(new ImageIcon(CadastroAdministrador.class
 				.getResource("/view/img/mensagem_sucesso.png")));
-		
+
 		fundoMensagemSalvo.setBounds(153, 85, 428, 34);
 		fundoMensagemSalvo.setVisible(false);
-		
+
 		contentPanel.add(fundoMensagemSalvo);
 
 		JLabel lblAtendentecampoOpcional = new JLabel(
 				"Atendente - (este campo \u00E9 opcional).");
-		
+
 		lblAtendentecampoOpcional.setForeground(Color.DARK_GRAY);
 		lblAtendentecampoOpcional.setFont(new Font("Cambria", Font.PLAIN, 17));
 		lblAtendentecampoOpcional.setBounds(134, 130, 459, 22);
@@ -166,18 +190,40 @@ public class CadastroCaixa extends JDialog {
 		campoAtendente.setColumns(10);
 		campoAtendente.setDocument(new TamanhoMaximo(100));
 		
+		campoAtendente.addKeyListener(new KeyAdapter() {
+
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+			
+				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
+					
+					validarInformacoes();
+					
+				}
+				
+				else if (arg0.getKeyCode() == KeyEvent.VK_ESCAPE) {
+					
+					dispose();
+					
+				}
+			
+			}
+			
+		});
+
 		campoAtendente.setBorder(BorderFactory.createCompoundBorder(
-		campoAtendente.getBorder(), BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-		
+				campoAtendente.getBorder(),
+				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+
 		campoAtendente.setBounds(134, 157, 447, 29);
 		contentPanel.add(campoAtendente);
 
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(0, 0, 611, 337);
-		
+
 		lblNewLabel.setIcon(new ImageIcon(CadastroCaixa.class
 				.getResource("/view/img/novo_caixa.jpg")));
-		
+
 		contentPanel.add(lblNewLabel);
 
 	}
@@ -218,12 +264,12 @@ public class CadastroCaixa extends JDialog {
 			fachada = Fachada.getInstance();
 
 			Caixa caixa = new Caixa();
-			
+
 			caixa.setCaixa(campoNumero.getText().toString());
 			caixa.setAtendente(campoAtendente.getText().toString());
 
 			try {
-				
+
 				if (fachada.inserirCaixa(caixa)) {
 
 					fundoMensagemErro.setVisible(false);
@@ -232,26 +278,26 @@ public class CadastroCaixa extends JDialog {
 					fundoMensagemSalvo.setVisible(true);
 					sucesso.setText("Caixa cadastrado com Sucesso");
 					sucesso.setVisible(true);
-					
+
 					campoAtendente.setText("");
 					campoNumero.setText("");
 					campoNumero.requestFocus();
 
 				}
-				
+
 				else {
-					
+
 					erro.setText("Ocorreu um Erro tente Novamente!");
 					erro.setVisible(true);
-					
+
 				}
-				
+
 			}
-			
+
 			catch (SQLException e) {
-				
+
 				e.printStackTrace();
-				
+
 			}
 
 		}
@@ -259,24 +305,24 @@ public class CadastroCaixa extends JDialog {
 	}
 
 	public boolean ValidaNumero(String Numero) {
-		
+
 		long valor;
-		
+
 		try {
-			
+
 			valor = Long.parseLong(Numero);
 			System.out.println(valor);
-			
+
 			return true;
-			
+
 		}
-		
+
 		catch (NumberFormatException ex) {
-			
+
 			return false;
-			
+
 		}
-		
+
 	}
 
 }
