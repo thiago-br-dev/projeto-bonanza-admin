@@ -17,4 +17,6 @@ public interface IRepositorioAdministrador {
 	
 	Administrador verificarLogin(Administrador administrador) throws SQLException;
 	
+	boolean verificarLoginExistente(String login) throws SQLException;
+	
 }

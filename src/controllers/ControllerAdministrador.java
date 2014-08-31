@@ -63,4 +63,8 @@ public class ControllerAdministrador {
 	}
 
 	// -------------------------------------------------------------------
+	public boolean verificarLoginExistente(String login) throws SQLException, Exception {
+		return administradorRepositorio.verificarLoginExistente(login);
+	}
+	// -------------------------------------------------------------------
 }

@@ -87,7 +87,12 @@ public class Fachada {
 	public Administrador verificarLogin(Administrador administrador) throws SQLException {
 		return this.administrador.verificarLogin(administrador);
 	}
-
+	
+	// ---------------------------------------------------------------------
+	public boolean verificarLoginExistente(String login) throws SQLException, Exception {
+		return this.administrador.verificarLoginExistente(login);
+	}
+	
 	// ---------------------------------------------------------------------
 	// ************************* Preferencia *******************************
 	// ---------------------------------------------------------------------

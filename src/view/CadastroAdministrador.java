@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -27,88 +28,110 @@ public class CadastroAdministrador extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	
+
 	private JLabel erro, fundoMensagemErro, fundoMensagemSalvo, sucesso;
 	private JTextField campoNome;
 	private JTextField campoLogin;
 	private JPasswordField campoConfirmarSenha;
 	private JPasswordField campoSenha;
-	
+
 	private Fachada fachada;
 
 	public static void main(String[] args) {
-		
+
 		try {
-			
+
 			UIManager
-			.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-			
+					.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+
 			CadastroAdministrador dialog = new CadastroAdministrador();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
-			
+
 		}
-		
+
 		catch (Exception e) {
-			
+
 			e.printStackTrace();
-			
+
 		}
-		
+
 	}
 
 	public CadastroAdministrador() {
-		
+
 		setTitle("Cadastro de Administrador - Bonanza Supermercados");
 		setBounds(100, 100, 638, 356);
 		setResizable(false);
 		setModal(true);
 		setLocationRelativeTo(null);
-		
+
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		
+
 		campoNome = new JTextField();
 		campoNome.addKeyListener(new KeyAdapter() {
-			
+
 			@Override
 			public void keyPressed(KeyEvent arg0) {
-				
+
 				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
+
+					try {
+						
+						validarInformacoes();
+						
+					}
 					
-					validarInformacoes();
+					catch (SQLException e) {
+						
+						e.printStackTrace();
+						
+					}
 					
+					catch (Exception e) {
+						
+						e.printStackTrace();
+						
+					}
+
 				}
-				
+
+				else if (arg0.getKeyCode() == KeyEvent.VK_ESCAPE) {
+
+					dispose();
+
+				}
+
 			}
-			
+
 		});
-		
+
 		campoNome.setDocument(new TamanhoMaximo(100));
 		campoNome.setBounds(33, 165, 561, 29);
 		campoNome.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		campoNome.setColumns(10);
-		
+
 		campoNome.setBorder(BorderFactory.createCompoundBorder(
 				campoNome.getBorder(),
 				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-		
+
 		contentPanel.add(campoNome);
-		
+
 		JLabel nome = new JLabel("Nome Completo");
 		nome.setForeground(Color.DARK_GRAY);
 		nome.setFont(new Font("Cambria", Font.PLAIN, 17));
 		nome.setBounds(33, 138, 117, 22);
 		contentPanel.add(nome);
-		
+
 		JLabel lblLogin = new JLabel("Login");
 		lblLogin.setForeground(Color.DARK_GRAY);
 		lblLogin.setFont(new Font("Cambria", Font.PLAIN, 17));
 		lblLogin.setBounds(33, 201, 40, 22);
 		contentPanel.add(lblLogin);
-		
+
 		campoLogin = new JTextField();
 		campoLogin.setDocument(new TamanhoMaximo(20));
 		campoLogin.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -116,100 +139,182 @@ public class CadastroAdministrador extends JDialog {
 		campoLogin.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent arg0) {
-				
+
 				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
+
+					try {
+						
+						validarInformacoes();
+						
+					}
 					
-					validarInformacoes();
+					catch (SQLException e) {
+						
+						e.printStackTrace();
+						
+					}
 					
+					catch (Exception e) {
+						
+						e.printStackTrace();
+						
+					}
+
 				}
-				
+
+				else if (arg0.getKeyCode() == KeyEvent.VK_ESCAPE) {
+
+					dispose();
+
+				}
+
 			}
 		});
-		
+
 		campoLogin.setBorder(BorderFactory.createCompoundBorder(
 				campoLogin.getBorder(),
 				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-		
+
 		campoLogin.setBounds(33, 228, 189, 29);
 		contentPanel.add(campoLogin);
-		
+
 		JLabel lblConfirmarSenha = new JLabel("Confirmar Senha");
 		lblConfirmarSenha.setForeground(Color.DARK_GRAY);
 		lblConfirmarSenha.setFont(new Font("Cambria", Font.PLAIN, 17));
 		lblConfirmarSenha.setBounds(418, 201, 176, 22);
 		contentPanel.add(lblConfirmarSenha);
-		
+
 		campoConfirmarSenha = new JPasswordField();
 		campoConfirmarSenha.setDocument(new TamanhoMaximo(20));
 		campoConfirmarSenha.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		campoConfirmarSenha.setColumns(10);
-		
+
 		campoConfirmarSenha.setBorder(BorderFactory.createCompoundBorder(
 				campoConfirmarSenha.getBorder(),
 				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-		
+
 		campoConfirmarSenha.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent arg0) {
-				
+
 				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
+
+					try {
+						
+						validarInformacoes();
+						
+					}
 					
-					validarInformacoes();
+					catch (SQLException e) {
+						
+						e.printStackTrace();
+						
+					}
 					
+					catch (Exception e) {
+						
+						e.printStackTrace();
+						
+					}
+
 				}
-				
+
+				else if (arg0.getKeyCode() == KeyEvent.VK_ESCAPE) {
+
+					dispose();
+
+				}
+
 			}
 		});
-		
+
 		campoConfirmarSenha.setBounds(418, 228, 176, 29);
 		contentPanel.add(campoConfirmarSenha);
-		
+
 		campoSenha = new JPasswordField();
 		campoSenha.setDocument(new TamanhoMaximo(20));
 		campoSenha.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		campoSenha.setColumns(10);
-		
+
 		campoSenha.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent arg0) {
-				
+
 				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
+
+					try {
+						
+						validarInformacoes();
+						
+					}
 					
-					validarInformacoes();
+					catch (SQLException e) {
+						
+						e.printStackTrace();
+						
+					}
 					
+					catch (Exception e) {
+						
+						e.printStackTrace();
+						
+					}
+
 				}
-				
+
+				else if (arg0.getKeyCode() == KeyEvent.VK_ESCAPE) {
+
+					dispose();
+
+				}
+
 			}
 		});
-		
+
 		campoSenha.setBorder(BorderFactory.createCompoundBorder(
 				campoSenha.getBorder(),
 				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-		
+
 		campoSenha.setBounds(232, 228, 176, 29);
 		contentPanel.add(campoSenha);
-		
+
 		JLabel lblSenha = new JLabel("Senha");
 		lblSenha.setForeground(Color.DARK_GRAY);
 		lblSenha.setFont(new Font("Cambria", Font.PLAIN, 17));
 		lblSenha.setBounds(232, 201, 47, 22);
 		contentPanel.add(lblSenha);
-		
+
 		JButton botaoSalvar = new JButton("Salvar");
-		
+
 		botaoSalvar.addActionListener(new ActionListener() {
-			
+
 			public void actionPerformed(ActionEvent arg0) {
+
+				try {
+					
+					validarInformacoes();
+					
+				}
 				
-				validarInformacoes();
+				catch (SQLException e) {
+					
+					e.printStackTrace();
+					
+				}
 				
+				catch (Exception e) {
+					
+					e.printStackTrace();
+					
+				}
+
 			}
-		
+
 		});
-		
+
 		botaoSalvar.setBounds(418, 274, 177, 30);
 		contentPanel.add(botaoSalvar);
-		
+
 		JButton botaoCancelar = new JButton("Cancelar Cadastro");
 		botaoCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -218,47 +323,55 @@ public class CadastroAdministrador extends JDialog {
 		});
 		botaoCancelar.setBounds(232, 274, 177, 30);
 		contentPanel.add(botaoCancelar);
-		
+
 		erro = new JLabel("Erro");
 		erro.setHorizontalAlignment(SwingConstants.CENTER);
 		erro.setForeground(Color.GRAY);
 		erro.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		erro.setVisible(false);
 		erro.setBounds(168, 97, 427, 24);
-		
+
 		contentPanel.add(erro);
-		
+
 		fundoMensagemErro = new JLabel("New label");
-		fundoMensagemErro.setIcon(new ImageIcon(CadastroAdministrador.class.getResource("/view/img/mensagem_erro.png")));
+		fundoMensagemErro.setIcon(new ImageIcon(CadastroAdministrador.class
+				.getResource("/view/img/mensagem_erro.png")));
 		fundoMensagemErro.setBounds(167, 93, 428, 34);
 		fundoMensagemErro.setVisible(false);
 		contentPanel.add(fundoMensagemErro);
-		
+
 		sucesso = new JLabel("Administrador cadastrado com sucesso.");
 		sucesso.setHorizontalAlignment(SwingConstants.CENTER);
 		sucesso.setForeground(Color.GRAY);
 		sucesso.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		sucesso.setVisible(false);
 		sucesso.setBounds(168, 97, 427, 24);
-		
+
 		contentPanel.add(sucesso);
-		
+
 		fundoMensagemSalvo = new JLabel("New label");
-		fundoMensagemSalvo.setIcon(new ImageIcon(CadastroAdministrador.class.getResource("/view/img/mensagem_sucesso.png")));
+		fundoMensagemSalvo.setIcon(new ImageIcon(CadastroAdministrador.class
+				.getResource("/view/img/mensagem_sucesso.png")));
 		fundoMensagemSalvo.setBounds(167, 93, 428, 34);
 		fundoMensagemSalvo.setVisible(false);
 		contentPanel.add(fundoMensagemSalvo);
-		
+
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(0, 0, 633, 349);
-		lblNewLabel.setIcon(new ImageIcon(CadastroAdministrador.class.getResource("/view/img/novo_administrador.jpg")));
+		lblNewLabel.setIcon(new ImageIcon(CadastroAdministrador.class
+				.getResource("/view/img/novo_administrador.jpg")));
 		contentPanel.add(lblNewLabel);
-		
+
 	}
-	
+
 	@SuppressWarnings("deprecation")
-	public void validarInformacoes() {
+	public void validarInformacoes() throws SQLException, Exception {
+
+		fachada = Fachada.getInstance();
 		
+		boolean verificarLogin = fachada.verificarLoginExistente(campoLogin
+				.getText() + "");
+
 		if (campoNome.getText().trim().isEmpty()) {
 
 			fundoMensagemSalvo.setVisible(false);
@@ -281,6 +394,20 @@ public class CadastroAdministrador extends JDialog {
 			fundoMensagemErro.setVisible(true);
 
 			erro.setText("O campo (login) ainda não foi preenchido.");
+			erro.setVisible(true);
+
+			campoLogin.requestFocus();
+
+		}
+
+		else if (verificarLogin == true) {
+
+			fundoMensagemSalvo.setVisible(false);
+			sucesso.setVisible(false);
+
+			fundoMensagemErro.setVisible(true);
+
+			erro.setText("Outro administrador está usando este login. Tente outro.");
 			erro.setVisible(true);
 
 			campoLogin.requestFocus();
@@ -331,37 +458,44 @@ public class CadastroAdministrador extends JDialog {
 			campoSenha.requestFocus();
 
 		}
-		
+
 		else {
-			
+
 			Administrador administrador = new Administrador();
+			
 			administrador.setNome(campoNome.getText());
 			administrador.setLogin(campoLogin.getText());
 			administrador.setSenha(campoSenha.getText());
-			
+
 			fachada = Fachada.getInstance();
+			
 			try {
-				
+
 				fachada.inserirAdministrador(administrador);
-				
+
 				fundoMensagemErro.setVisible(false);
 				erro.setVisible(false);
-				
+
 				fundoMensagemSalvo.setVisible(true);
 				sucesso.setVisible(true);
-				
+
 				campoNome.setText("");
 				campoLogin.setText("");
 				campoSenha.setText("");
-				
+				campoConfirmarSenha.setText("");
+
 				campoNome.requestFocus();
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
+
 			}
 			
+			catch (SQLException e) {
+				
+				e.printStackTrace();
+				
+			}
+
 		}
-		
+
 	}
 
 }

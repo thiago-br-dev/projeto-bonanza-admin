@@ -173,4 +173,41 @@ public class RepositorioAdministrador implements IRepositorioAdministrador {
 
 		return null;
 	}
+	
+	// ---------------------------------------------------------------------------------
+		public boolean verificarLoginExistente(String login) throws SQLException {
+
+			String sql = "SELECT login FROM administrador";
+
+			try {
+
+				Connection conIntranet = new ConnectionFactory()
+						.getConnectionIntranet();
+
+				PreparedStatement stm1 = (PreparedStatement) conIntranet
+						.prepareStatement(sql);
+
+				ResultSet rs1 = stm1.executeQuery();
+
+				while (rs1.next()) {
+
+					String loginBD = rs1.getString(1);
+
+					if (loginBD.equals(login)) {
+						return true;
+					}
+
+				}
+				rs1.close();
+				stm1.close();
+				conIntranet.close();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return false;
+
+		}
+	
 }
