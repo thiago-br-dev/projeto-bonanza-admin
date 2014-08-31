@@ -20,10 +20,7 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -33,6 +30,8 @@ import facade.Fachada;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class GerenciarCaixa extends JDialog {
 
@@ -42,15 +41,16 @@ public class GerenciarCaixa extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 
-	static JTable tabelaDeResultados;
-	JScrollPane scrollTabela;
-	JLabel sucesso, fundoMensagemSalvo;
+	private static JTable tabelaDeResultados;
+	private JScrollPane scrollTabela;
+	private JLabel sucesso, fundoMensagemSalvo;
+	private JButton btnRemoverCaixa;
 
 	private Fachada fachada;
 	private List<Caixa> caixasBD;
 
-	int coluna = 0;
-	int linha = 0;
+	private int coluna = 0;
+	private int linha = 0;
 
 	public static void main(String[] args) {
 
@@ -131,6 +131,17 @@ public class GerenciarCaixa extends JDialog {
 			}
 
 		};
+		tabelaDeResultados.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				coluna = tabelaDeResultados.getSelectedColumn();
+				linha = tabelaDeResultados.getSelectedRow();
+				btnRemoverCaixa.setEnabled(true);
+				
+			}
+			
+		});
 
 		tabelaDeResultados.addKeyListener(new KeyAdapter() {
 			@Override
@@ -161,7 +172,8 @@ public class GerenciarCaixa extends JDialog {
 		scrollTabela = new JScrollPane(tabelaDeResultados);
 		painelTabela.add(scrollTabela);
 
-		JButton btnRemoverCaixa = new JButton("Remover Caixa");
+		btnRemoverCaixa = new JButton("Remover Caixa");
+		btnRemoverCaixa.setEnabled(false);
 		btnRemoverCaixa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -238,27 +250,6 @@ public class GerenciarCaixa extends JDialog {
 
 	}
 
-	public boolean validarTodasDatas(String data) {
-
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		sdf.setLenient(false);
-		String dataString = data;
-
-		if (data.equals("  /  /    ")) {
-			return true;
-		}
-
-		try {
-			Date dataVerificar = sdf.parse(dataString);
-			System.out.println(dataVerificar);
-			return true;
-		} catch (ParseException e) {
-			System.err.println("Data inválida");
-			return false;
-		}
-
-	}
-
 	public void SetRowHight(JTable table) {
 
 		int height = table.getRowHeight();
@@ -273,9 +264,15 @@ public class GerenciarCaixa extends JDialog {
 		Fachada resgatarCaixas = Fachada.getInstance();
 
 		try {
+			
 			caixasBD = resgatarCaixas.listarCaixa();
-		} catch (SQLException e) {
+			
+		}
+		
+		catch (SQLException e) {
+			
 			e.printStackTrace();
+			
 		}
 
 		String[][] dados2 = new String[caixasBD.size()][];

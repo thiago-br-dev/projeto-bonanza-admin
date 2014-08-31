@@ -85,16 +85,16 @@ public class GerarRelatorio extends JDialog {
 		dataFinal.setBounds(226, 140, 179, 34);
 		contentPanel.add(dataFinal);
 		
-		JButton btnAlterar = new JButton("Exportar Relatório");
-		btnAlterar.addActionListener(new ActionListener() {
+		JButton botaoExportarRelatorio = new JButton("Exportar Relatório");
+		botaoExportarRelatorio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				
 				
 			}
 		});
-		btnAlterar.setBounds(415, 184, 180, 35);
-		contentPanel.add(btnAlterar);
+		botaoExportarRelatorio.setBounds(415, 184, 180, 35);
+		contentPanel.add(botaoExportarRelatorio);
 		
 		JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.setBounds(415, 140, 179, 33);

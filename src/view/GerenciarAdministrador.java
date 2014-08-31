@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -19,15 +18,15 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.JButton;
-
 import models.Administrador;
 import facade.Fachada;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class GerenciarAdministrador extends JDialog {
 
@@ -35,15 +34,17 @@ public class GerenciarAdministrador extends JDialog {
 
 	static String[] colunas = new String[] { "Nome Completo", "Login" };
 	private final JPanel contentPanel = new JPanel();
-	static JTable tabelaDeResultados;
-	JScrollPane scrollTabela;
-	JLabel sucesso, fundoMensagemSalvo;
+	private static JTable tabelaDeResultados;
+	
+	private JScrollPane scrollTabela;
+	private JLabel sucesso, fundoMensagemSalvo;
+	private JButton btnRemoverCaixa;
 
 	private Fachada fachada;
 	private List<Administrador> administradoresBD;
 	
-	int coluna = 0;
-	int linha = 0;
+	private int coluna = 0;
+	private int linha = 0;
 
 	public static void main(String[] args) {
 
@@ -124,6 +125,19 @@ public class GerenciarAdministrador extends JDialog {
 			}
 
 		};
+		
+		tabelaDeResultados.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				coluna = tabelaDeResultados.getSelectedColumn();
+				linha = tabelaDeResultados.getSelectedRow();
+				
+				btnRemoverCaixa.setEnabled(true);
+				
+			}
+			
+		});
 
 		tabelaDeResultados.addKeyListener(new KeyAdapter() {
 			@Override
@@ -149,13 +163,17 @@ public class GerenciarAdministrador extends JDialog {
 
 		tabelaDeResultados
 				.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
 		tabelaDeResultados.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
 		scrollTabela = new JScrollPane(tabelaDeResultados);
 		painelTabela.add(scrollTabela);
 
-		JButton btnRemoverCaixa = new JButton("Remover Administrador");
+		btnRemoverCaixa = new JButton("Remover Administrador");
+		btnRemoverCaixa.setEnabled(false);
+		
 		btnRemoverCaixa.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent arg0) {
 
 				if (tabelaDeResultados.isCellSelected(linha, coluna)) {
@@ -204,6 +222,7 @@ public class GerenciarAdministrador extends JDialog {
 				
 			}
 		});
+		
 		btnRemoverCaixa.setBounds(559, 259, 145, 35);
 		contentPanel.add(btnRemoverCaixa);
 
@@ -217,16 +236,20 @@ public class GerenciarAdministrador extends JDialog {
 		contentPanel.add(sucesso);
 
 		fundoMensagemSalvo = new JLabel("New label");
+		
 		fundoMensagemSalvo.setIcon(new ImageIcon(CadastroAdministrador.class
 				.getResource("/view/img/mensagem_sucesso.png")));
+		
 		fundoMensagemSalvo.setBounds(275, 85, 428, 34);
 		fundoMensagemSalvo.setVisible(false);
 		contentPanel.add(fundoMensagemSalvo);
 
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(0, 0, 745, 419);
+		
 		lblNewLabel.setIcon(new ImageIcon(GerenciarAdministrador.class
 				.getResource("/view/img/gerenciar_administradores.jpg")));
+		
 		contentPanel.add(lblNewLabel);
 
 	}

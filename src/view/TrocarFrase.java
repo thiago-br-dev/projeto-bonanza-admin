@@ -3,6 +3,7 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -12,9 +13,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.SwingConstants;
 import javax.swing.UIManager;
+
 import facade.Fachada;
 import models.Preferencia;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
@@ -27,6 +31,7 @@ public class TrocarFrase extends JDialog {
 	private JTextField textField;
 	private Fachada fachada;
 	private ArrayList<Preferencia> preferencias;
+	private JLabel sucesso, fundoMensagemSalvo;
 
 	public static void main(String[] args) {
 
@@ -54,7 +59,7 @@ public class TrocarFrase extends JDialog {
 		fachada = Fachada.getInstance();
 
 		setTitle("Alterar frase do Painel - Bonanza Supermercados");
-		setBounds(100, 100, 637, 270);
+		setBounds(100, 100, 637, 275);
 		setResizable(false);
 		setModal(true);
 		setLocationRelativeTo(null);
@@ -65,7 +70,7 @@ public class TrocarFrase extends JDialog {
 		contentPanel.setLayout(null);
 
 		textField = new JTextField();
-		textField.setBounds(28, 143, 573, 29);
+		textField.setBounds(28, 156, 573, 29);
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		textField.setBorder(BorderFactory.createCompoundBorder(
 				textField.getBorder(),
@@ -127,8 +132,10 @@ public class TrocarFrase extends JDialog {
 						preferencia.setTexto(texto);
 
 						if (fachada.inserirPreferencia(preferencia)) {
-							JOptionPane.showMessageDialog(null,
-									"Frase Cadastrada com Sucesso!");
+							
+							fundoMensagemSalvo.setVisible(true);
+							sucesso.setVisible(true);
+							
 						} else {
 							System.out.println("fudeu2");
 							new SQLException();
@@ -144,16 +151,35 @@ public class TrocarFrase extends JDialog {
 
 		});
 
-		btnAlterar.setBounds(479, 183, 123, 30);
+		btnAlterar.setBounds(478, 196, 123, 30);
 		contentPanel.add(btnAlterar);
 
 		JLabel lblAltereAquiA = new JLabel(
 				"Altere aqui a frase do seu painel de atendimento.");
 
-		lblAltereAquiA.setBounds(28, 115, 530, 25);
+		lblAltereAquiA.setBounds(28, 128, 530, 25);
 		lblAltereAquiA.setForeground(Color.GRAY);
 		lblAltereAquiA.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		contentPanel.add(lblAltereAquiA);
+		
+		sucesso = new JLabel("Mensagem alterada com Sucesso.");
+		sucesso.setHorizontalAlignment(SwingConstants.CENTER);
+		sucesso.setForeground(Color.GRAY);
+		sucesso.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		sucesso.setVisible(false);
+		sucesso.setBounds(174, 88, 427, 24);
+
+		contentPanel.add(sucesso);
+
+		fundoMensagemSalvo = new JLabel("New label");
+
+		fundoMensagemSalvo.setIcon(new ImageIcon(CadastroAdministrador.class
+				.getResource("/view/img/mensagem_sucesso.png")));
+
+		fundoMensagemSalvo.setBounds(173, 84, 428, 34);
+		fundoMensagemSalvo.setVisible(false);
+
+		contentPanel.add(fundoMensagemSalvo);
 
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(0, 0, 643, 251);
