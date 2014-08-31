@@ -32,7 +32,7 @@ import exceptions.ExceptionPDF;
 
 public class Relatorio {
 
-	public void relatorioAtendimento(ArrayList<Caixa> caixas, ArrayList<Chamada> chamadas, String caminho) throws SQLException {
+	public void relatorioAtendimento(ArrayList<Caixa> caixas, ArrayList<Chamada> chamadas, String caminho, String dataInicio, String dataFinal, String caixa) throws SQLException {
 
 		String resource = "/view/img/logo-bonanza.png";
 		Document document = new Document(PageSize.A4, 40, 40, 40, 40);
@@ -106,7 +106,7 @@ public class Relatorio {
 			titulo.setAlignment(Element.ALIGN_CENTER);
 			document.add(titulo);
 			// ----------------------------------------------------------------------------------------
-
+			
 			// ----------------------------------------------------------------------------------------
 
 			Font fonte3 = new Font(FontFamily.TIMES_ROMAN, 10, Font.NORMAL,
@@ -114,6 +114,38 @@ public class Relatorio {
 			Font fonte4 = new Font(FontFamily.TIMES_ROMAN, 10, Font.NORMAL,
 					new BaseColor(BaseColor.BLACK.getRGB()));
 
+			if (!dataInicio.equals(null) && !dataFinal.equals(null) && !caixa.equals(null)){
+				
+				// ----------------------------------------------------------------------------------------
+				Paragraph subtitulo = new Paragraph("Data Início: "+dataInicio+"   Data Final: "+dataFinal+"    Nº Caixa: "+caixa, fonte4);
+				subtitulo.setSpacingBefore(2);
+				subtitulo.setSpacingAfter(5);
+				subtitulo.setAlignment(Element.ALIGN_CENTER);
+				document.add(subtitulo);
+				// ----------------------------------------------------------------------------------------
+			}
+			else if (!dataInicio.equals(null) && !dataFinal.equals(null) && caixa.equals(null)){
+				// ----------------------------------------------------------------------------------------
+				Paragraph subtitulo = new Paragraph("Data Início: "+dataInicio+"   Data Final: "+dataFinal, fonte4);
+				subtitulo.setSpacingBefore(2);
+				subtitulo.setSpacingAfter(5);
+				subtitulo.setAlignment(Element.ALIGN_CENTER);
+				document.add(subtitulo);
+				// ----------------------------------------------------------------------------------------
+			}
+			
+			else if (dataInicio.equals(null) && dataFinal.equals(null) && !caixa.equals(null)){
+				// ----------------------------------------------------------------------------------------
+				Paragraph subtitulo = new Paragraph("Nº Caixa: "+caixa, fonte4);
+				subtitulo.setSpacingBefore(2);
+				subtitulo.setSpacingAfter(5);
+				subtitulo.setAlignment(Element.ALIGN_CENTER);
+				document.add(subtitulo);
+				// ----------------------------------------------------------------------------------------
+			}
+			
+
+			
 			PdfPTable table = new PdfPTable(new float[] { 0.2f, 0.4f, 0.2f,
 					0.2f, 0.2f});
 			table.setWidthPercentage(100.0f);
@@ -176,7 +208,7 @@ public class Relatorio {
 					placa2.setBackgroundColor(BaseColor.WHITE);
 					placa2.setBorderColor(BaseColor.WHITE);
 
-					PdfPCell inicioVigencia2 = new PdfPCell(new Paragraph("espera",
+					PdfPCell inicioVigencia2 = new PdfPCell(new Paragraph(""+chamadas.get(j).getEspera(),
 							fonte4));
 					inicioVigencia2.setColspan(1);
 					inicioVigencia2.setBackgroundColor(BaseColor.WHITE);
@@ -216,7 +248,7 @@ public class Relatorio {
 						placa2.setBackgroundColor(BaseColor.GRAY);
 						placa2.setBorderColor(BaseColor.GRAY);
 
-						PdfPCell inicioVigencia2 = new PdfPCell(new Paragraph("Espera",
+						PdfPCell inicioVigencia2 = new PdfPCell(new Paragraph(""+chamadas.get(j).getEspera(),
 								fonte4));
 						inicioVigencia2.setColspan(1);
 						inicioVigencia2.setBackgroundColor(BaseColor.GRAY);

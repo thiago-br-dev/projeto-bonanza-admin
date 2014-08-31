@@ -12,4 +12,6 @@ public interface IRepositorioChamada {
 	boolean inserirChamada(Chamada chamada) throws SQLException;
 	
 	List<Chamada> listarChamada() throws SQLException;
+	
+	List<Chamada> buscarPorDatas(String dataInicio, String dataFim) throws SQLException;
 }

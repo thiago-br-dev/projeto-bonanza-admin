@@ -14,4 +14,6 @@ public interface IRepositorioCaixa {
 	boolean atualizarCaixa(Caixa caixa) throws SQLException;
 	
 	List<Caixa> listarCaixa() throws SQLException;
+	
+	List<Caixa> buscarPorCaixa(String chave) throws SQLException;
 }

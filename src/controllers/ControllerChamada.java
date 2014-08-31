@@ -46,4 +46,9 @@ public class ControllerChamada {
 	}
 
 	// -------------------------------------------------------------------
+	public List<Chamada> buscarPorDatas(String dataInicio, String dataFim) throws SQLException {
+		return chamadaRepositorio.buscarPorDatas(dataInicio, dataFim);
+	}
+
+	// -------------------------------------------------------------------
 }

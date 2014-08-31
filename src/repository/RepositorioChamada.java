@@ -59,7 +59,8 @@ public class RepositorioChamada implements IRepositorioChamada {
 				chamada.setId(rs1.getInt(1));
 				chamada.setData(rs1.getString(2));
 				chamada.setHora(rs1.getString(3));
-				chamada.setCaixaId(rs1.getInt(4));
+				chamada.setEspera(rs1.getString(4));
+				chamada.setCaixaId(rs1.getInt(5));
 
 				chamadaDB.add(chamada);
 
@@ -70,4 +71,39 @@ public class RepositorioChamada implements IRepositorioChamada {
 
 		return chamadaDB ;
 	}
+	//----------------------------------------------------------------------------------
+	public List<Chamada> buscarPorDatas(String dataInicio, String dataFim)
+			throws SQLException {
+		ArrayList<Chamada> chamadaDB = new ArrayList<>();
+		Chamada chamada;
+		String sql = "SELECT * FROM chamada WHERE data >='"+dataInicio+"' AND data <= '"+dataFim+"' ORDER BY id DESC";
+
+			
+			Connection conIntranet = new ConnectionFactory()
+			.getConnectionIntranet();
+			
+			PreparedStatement stm1 = (PreparedStatement) conIntranet
+					.prepareStatement(sql);
+			
+			ResultSet rs1 = stm1.executeQuery();
+			
+			while (rs1.next()) {
+
+				chamada = new Chamada();
+				chamada.setId(rs1.getInt(1));
+				chamada.setData(rs1.getString(2));
+				chamada.setHora(rs1.getString(3));
+				chamada.setEspera(rs1.getString(4));
+				chamada.setCaixaId(rs1.getInt(5));
+
+				chamadaDB.add(chamada);
+
+			}
+			rs1.close();
+			stm1.close();
+			conIntranet.close();
+
+		return chamadaDB ;
+	}
+	//----------------------------------------------------------------------------------
 }

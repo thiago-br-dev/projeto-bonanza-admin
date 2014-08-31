@@ -151,11 +151,21 @@ public class Fachada {
 	}
 
 	// ---------------------------------------------------------------------
+	public List<Caixa> buscarPorCaixa(String chave) throws SQLException {
+		return this.caixa.buscarPorCaixa(chave);
+	}
+
+	// ---------------------------------------------------------------------
 	// ************************* chamada *******************************
 	// ---------------------------------------------------------------------
 	public List<Chamada> listarChamada()
 			throws SQLException {
 		return this.chamada.listar();
+	}
+	// ---------------------------------------------------------------------
+	public List<Chamada> buscarPorDatas(String dataInicio, String dataFim)
+			throws SQLException {
+		return this.chamada.buscarPorDatas(dataInicio, dataFim);
 	}
 	// ---------------------------------------------------------------------
 }

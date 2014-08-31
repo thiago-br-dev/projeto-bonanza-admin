@@ -57,5 +57,10 @@ public class ControllerCaixa {
 	}
 
 	// -------------------------------------------------------------------
+	public List<Caixa> buscarPorCaixa(String chave) throws SQLException {
+		return caixaRepositorio.buscarPorCaixa(chave);
+	}
+
+	// -------------------------------------------------------------------
 
 }

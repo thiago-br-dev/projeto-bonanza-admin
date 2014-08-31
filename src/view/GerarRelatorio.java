@@ -98,41 +98,6 @@ public class GerarRelatorio extends JDialog {
 		contentPanel.add(dataFinal);
 		
 		JButton botaoExportarRelatorio = new JButton("Exportar Relatório");
-		botaoExportarRelatorio.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				chamadasBD = new ArrayList<Chamada>();
-				try {
-					chamadasBD = (ArrayList<Chamada>) fachada.listarChamada();
-					caixasBD = (ArrayList<Caixa>) fachada.listarCaixa();
-
-				
-				JFileChooser chooser;
-				chooser = new JFileChooser();
-				Relatorio relatorio;
-
-				String caminho = "";
-
-				int retorno = chooser.showSaveDialog(null);
-
-				if (retorno == JFileChooser.APPROVE_OPTION) {
-
-					caminho = chooser.getSelectedFile().getAbsolutePath();
-					relatorio = new Relatorio();
-					try {
-						relatorio.relatorioAtendimento(caixasBD,
-								chamadasBD, caminho);
-
-					} catch (SQLException e1) {
-						e1.printStackTrace();
-					}
-
-				}
-				} catch (SQLException e2) {
-					e2.printStackTrace();
-				}
-			}
-		});
 		botaoExportarRelatorio.setBounds(415, 184, 180, 35);
 		contentPanel.add(botaoExportarRelatorio);
 		
@@ -159,6 +124,43 @@ public class GerarRelatorio extends JDialog {
 		lblNewLabel.setBounds(0, 0, 633, 251);
 		lblNewLabel.setIcon(new ImageIcon(TrocarFrase.class.getResource("/view/img/gerar_relatorio.jpg")));
 		contentPanel.add(lblNewLabel);
+		
+		
+		botaoExportarRelatorio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				chamadasBD = new ArrayList<Chamada>();
+				try {
+					chamadasBD = (ArrayList<Chamada>) fachada.buscarPorDatas(dataInicial.getText().toString(), dataFinal.getText().toString());
+					caixasBD = (ArrayList<Caixa>) fachada.buscarPorCaixa(comboBox.getSelectedItem().toString());
+
+				
+				JFileChooser chooser;
+				chooser = new JFileChooser();
+				Relatorio relatorio;
+
+				String caminho = "";
+
+				int retorno = chooser.showSaveDialog(null);
+
+				if (retorno == JFileChooser.APPROVE_OPTION) {
+
+					caminho = chooser.getSelectedFile().getAbsolutePath();
+					relatorio = new Relatorio();
+					try {
+						relatorio.relatorioAtendimento(caixasBD,
+								chamadasBD, caminho, dataInicial.getText().toString(), dataFinal.getText().toString(), comboBox.getSelectedItem().toString());
+
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+
+				}
+				} catch (SQLException e2) {
+					e2.printStackTrace();
+				}
+			}
+		});
 		
 		
 		// informacao dos caixas 

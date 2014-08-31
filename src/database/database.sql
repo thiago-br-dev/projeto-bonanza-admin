@@ -26,6 +26,7 @@
   id int not null auto_increment primary key,
   data varchar(20),
   hora varchar(20),
+  espera varchar(20),
   caixa_id int,
   foreign key(caixa_id) references caixa(id)
   )engine = InnoDB DEFAULT CHARSET=utf8;
