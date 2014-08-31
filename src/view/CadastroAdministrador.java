@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.BorderLayout;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -13,28 +12,29 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
-
 import util.TamanhoMaximo;
 import models.Administrador;
 import facade.Fachada;
-
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class CadastroAdministrador extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
+	
 	private JLabel erro, fundoMensagemErro, fundoMensagemSalvo, sucesso;
 	private JTextField campoNome;
 	private JTextField campoLogin;
 	private JPasswordField campoConfirmarSenha;
 	private JPasswordField campoSenha;
 	
-	Fachada fachada;
+	private Fachada fachada;
 
 	public static void main(String[] args) {
 		
@@ -71,6 +71,21 @@ public class CadastroAdministrador extends JDialog {
 		contentPanel.setLayout(null);
 		
 		campoNome = new JTextField();
+		campoNome.addKeyListener(new KeyAdapter() {
+			
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				
+				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
+					
+					validarInformacoes();
+					
+				}
+				
+			}
+			
+		});
+		
 		campoNome.setDocument(new TamanhoMaximo(100));
 		campoNome.setBounds(33, 165, 561, 29);
 		campoNome.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -98,6 +113,18 @@ public class CadastroAdministrador extends JDialog {
 		campoLogin.setDocument(new TamanhoMaximo(20));
 		campoLogin.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		campoLogin.setColumns(10);
+		campoLogin.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				
+				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
+					
+					validarInformacoes();
+					
+				}
+				
+			}
+		});
 		
 		campoLogin.setBorder(BorderFactory.createCompoundBorder(
 				campoLogin.getBorder(),
@@ -121,6 +148,19 @@ public class CadastroAdministrador extends JDialog {
 				campoConfirmarSenha.getBorder(),
 				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 		
+		campoConfirmarSenha.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				
+				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
+					
+					validarInformacoes();
+					
+				}
+				
+			}
+		});
+		
 		campoConfirmarSenha.setBounds(418, 228, 176, 29);
 		contentPanel.add(campoConfirmarSenha);
 		
@@ -128,6 +168,19 @@ public class CadastroAdministrador extends JDialog {
 		campoSenha.setDocument(new TamanhoMaximo(20));
 		campoSenha.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		campoSenha.setColumns(10);
+		
+		campoSenha.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				
+				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
+					
+					validarInformacoes();
+					
+				}
+				
+			}
+		});
 		
 		campoSenha.setBorder(BorderFactory.createCompoundBorder(
 				campoSenha.getBorder(),
@@ -181,7 +234,7 @@ public class CadastroAdministrador extends JDialog {
 		fundoMensagemErro.setVisible(false);
 		contentPanel.add(fundoMensagemErro);
 		
-		sucesso = new JLabel("Usuário cadastrado com sucesso.");
+		sucesso = new JLabel("Administrador cadastrado com sucesso.");
 		sucesso.setHorizontalAlignment(SwingConstants.CENTER);
 		sucesso.setForeground(Color.GRAY);
 		sucesso.setFont(new Font("Tahoma", Font.PLAIN, 13));
