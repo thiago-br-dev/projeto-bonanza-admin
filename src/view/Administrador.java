@@ -145,6 +145,20 @@ public class Administrador extends JFrame {
 		mnRelatrios.add(mntmMeusCaixas);
 		mntmGerarNovo.setIcon(new ImageIcon(Administrador.class.getResource("/view/img/gerenciar_administrador.png")));
 		mnRelatrios.add(mntmGerarNovo);
+		
+		JMenu mnRelatrios_1 = new JMenu("Relat\u00F3rios");
+		menuBar.add(mnRelatrios_1);
+		
+		JMenuItem mntmExportarNovo = new JMenuItem("Exportar Novo");
+		mntmExportarNovo.setIcon(new ImageIcon(Administrador.class.getResource("/view/img/relatorio.png")));
+		mntmExportarNovo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				GerarRelatorio.main(null);
+				
+			}
+		});
+		mnRelatrios_1.add(mntmExportarNovo);
 
 		JMenu mnConfigurao = new JMenu("Configura\u00E7\u00E3o");
 		menuBar.add(mnConfigurao);
