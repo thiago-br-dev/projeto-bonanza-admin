@@ -105,7 +105,7 @@ public class RepositorioAdministrador implements IRepositorioAdministrador {
 
 		ArrayList<Administrador> AdministradorDB = new ArrayList<>();
 		Administrador administrador;
-		String sql = "SELECT * FROM bem_segurado ";
+		String sql = "SELECT * FROM administrador ";
 
 			
 			Connection conIntranet = new ConnectionFactory()
@@ -121,6 +121,7 @@ public class RepositorioAdministrador implements IRepositorioAdministrador {
 				administrador = new Administrador();
 				administrador.setId(rs1.getInt(1));
 				administrador.setNome(rs1.getString(2));
+				administrador.setLogin(rs1.getString(3));
 
 				AdministradorDB.add(administrador);
 

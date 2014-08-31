@@ -19,6 +19,8 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.JButton;
 
+import models.Administrador;
+import models.Caixa;
 import facade.Fachada;
 
 import java.awt.event.ActionListener;
@@ -30,57 +32,82 @@ import java.util.List;
 public class GerenciarAdministrador extends JDialog {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	static String[] colunas = new String[] { "Nome Completo", "Login" };
 	private final JPanel contentPanel = new JPanel();
 	static JTable tabelaDeResultados;
 	JScrollPane scrollTabela;
 	JLabel sucesso, fundoMensagemSalvo;
-	
+
 	private Fachada fachada;
 	private List<models.Administrador> administradoresBD;
 
 	public static void main(String[] args) {
-		
+
 		try {
-			
+
 			UIManager
-				.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-			
+					.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+
 			GerenciarAdministrador dialog = new GerenciarAdministrador();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
-			
+
 		}
-		
+
 		catch (Exception e) {
-			
+
 			e.printStackTrace();
-			
+
 		}
-		
+
 	}
 
 	public GerenciarAdministrador() {
-		
+
 		setTitle("Gerenciamento de Administradores - Bonanza Supermercados");
 		setBounds(100, 100, 739, 349);
 		setResizable(false);
 		setModal(true);
 		setLocationRelativeTo(null);
-		
+
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		
+
 		JPanel painelTabela = new JPanel();
 		painelTabela.setBounds(34, 134, 669, 114);
 		contentPanel.add(painelTabela);
 		painelTabela.setLayout(new BorderLayout());
-		
-		String[][] dados = null;
-		
+
+		fachada = Fachada.getInstance();
+		administradoresBD = new ArrayList<models.Administrador>();
+
+		try {
+
+			administradoresBD = fachada.listarAdministrador();
+
+		}
+
+		catch (SQLException e) {
+
+			e.printStackTrace();
+
+		}
+
+		String[][] dados = new String[administradoresBD.size()][];
+		int i = 0;
+
+		for (Administrador adm : administradoresBD) {
+
+			dados[i] = new String[] { String.valueOf(adm.getNome()),
+					adm.getLogin() };
+
+			i += 1;
+
+		}
+
 		DefaultTableModel modelo = new DefaultTableModel(dados, colunas);
 
 		tabelaDeResultados = new JTable(modelo) {
@@ -94,7 +121,7 @@ public class GerenciarAdministrador extends JDialog {
 			}
 
 		};
-		
+
 		tabelaDeResultados.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -106,17 +133,15 @@ public class GerenciarAdministrador extends JDialog {
 				}
 
 			}
-			
+
 		});
 
-		tabelaDeResultados.getColumnModel().getColumn(0)
-				.setPreferredWidth(500);
-		tabelaDeResultados.getColumnModel().getColumn(1)
-				.setPreferredWidth(250);
-		
+		tabelaDeResultados.getColumnModel().getColumn(0).setPreferredWidth(500);
+		tabelaDeResultados.getColumnModel().getColumn(1).setPreferredWidth(250);
+
 		tabelaDeResultados.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		SetRowHight(tabelaDeResultados);
-		
+
 		tabelaDeResultados.getTableHeader().setReorderingAllowed(false);
 
 		tabelaDeResultados
@@ -125,62 +150,47 @@ public class GerenciarAdministrador extends JDialog {
 
 		scrollTabela = new JScrollPane(tabelaDeResultados);
 		painelTabela.add(scrollTabela);
-		
+
 		JButton btnRemoverCaixa = new JButton("Remover Administrador");
 		btnRemoverCaixa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+
 				
 				
 			}
 		});
 		btnRemoverCaixa.setBounds(559, 259, 145, 35);
 		contentPanel.add(btnRemoverCaixa);
-		
+
 		sucesso = new JLabel("Usuário cadastrado com sucesso.");
 		sucesso.setHorizontalAlignment(SwingConstants.CENTER);
 		sucesso.setForeground(Color.GRAY);
 		sucesso.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		sucesso.setVisible(false);
 		sucesso.setBounds(276, 89, 427, 24);
-		
+
 		contentPanel.add(sucesso);
-		
+
 		fundoMensagemSalvo = new JLabel("New label");
-		fundoMensagemSalvo.setIcon(new ImageIcon(CadastroAdministrador.class.getResource("/view/img/mensagem_sucesso.png")));
+		fundoMensagemSalvo.setIcon(new ImageIcon(CadastroAdministrador.class
+				.getResource("/view/img/mensagem_sucesso.png")));
 		fundoMensagemSalvo.setBounds(275, 85, 428, 34);
 		fundoMensagemSalvo.setVisible(false);
 		contentPanel.add(fundoMensagemSalvo);
-		
+
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(0, 0, 745, 419);
-		lblNewLabel.setIcon(new ImageIcon(GerenciarAdministrador.class.getResource("/view/img/gerenciar_administradores.jpg")));
+		lblNewLabel.setIcon(new ImageIcon(GerenciarAdministrador.class
+				.getResource("/view/img/gerenciar_administradores.jpg")));
 		contentPanel.add(lblNewLabel);
-		
-		
-		// informacao do banco de dados
-		
-		fachada = Fachada.getInstance();
-		administradoresBD = new ArrayList<models.Administrador>();
-		try {
-			administradoresBD = fachada.listarAdministrador();
-			
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		
+
 	}
-	
+
 	public void SetRowHight(JTable table) {
 
 		int height = table.getRowHeight();
 		table.setRowHeight(height + 7);
 
 	}
-	
 
-	
-	
 }

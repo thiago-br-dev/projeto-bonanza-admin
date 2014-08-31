@@ -275,7 +275,6 @@ public class GerenciarCaixa extends JDialog {
 		try {
 			caixasBD = resgatarCaixas.listarCaixa();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
