@@ -14,12 +14,15 @@ import java.util.List;
 
 import models.Administrador;
 import models.Caixa;
+import models.Chamada;
 import models.Preferencia;
 import repository.RepositorioAdministrador;
 import repository.RepositorioCaixa;
+import repository.RepositorioChamada;
 import repository.RepositorioPreferencia;
 import controllers.ControllerAdministrador;
 import controllers.ControllerCaixa;
+import controllers.ControllerChamada;
 import controllers.ControllerPreferencia;
 
 public class Fachada {
@@ -28,6 +31,7 @@ public class Fachada {
 	private ControllerAdministrador administrador;
 	private ControllerPreferencia preferencia;
 	private ControllerCaixa caixa;
+	private ControllerChamada chamada;
 
 	// Metodo para iniciar todos os Repositorios e controladores
 	// ---------------------------------------------------------------------
@@ -40,7 +44,9 @@ public class Fachada {
 		
 		RepositorioCaixa rc = new RepositorioCaixa();
 		caixa = new ControllerCaixa(rc);
-		
+	
+		RepositorioChamada rh = new RepositorioChamada();
+		chamada = new ControllerChamada(rh);
 	}
 
 	// Contrutor da classe
@@ -144,5 +150,12 @@ public class Fachada {
 		return this.caixa.listar();
 	}
 
+	// ---------------------------------------------------------------------
+	// ************************* chamada *******************************
+	// ---------------------------------------------------------------------
+	public List<Chamada> listarChamada()
+			throws SQLException {
+		return this.chamada.listar();
+	}
 	// ---------------------------------------------------------------------
 }

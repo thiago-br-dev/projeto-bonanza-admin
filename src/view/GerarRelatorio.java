@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 import javax.swing.BorderFactory;
+import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -17,10 +18,17 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.JComboBox;
 
+import util.Relatorio;
+import models.Caixa;
+import models.Chamada;
+import facade.Fachada;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class GerarRelatorio extends JDialog {
@@ -30,6 +38,10 @@ public class GerarRelatorio extends JDialog {
 	private JFormattedTextField dataInicial;
 	private JFormattedTextField dataFinal;
 	JLabel sucesso, fundoMensagemSalvo;
+	
+	private Fachada fachada;
+	private ArrayList<Caixa> caixasBD;
+	private ArrayList<Chamada> chamadasBD;
 
 	public static void main(String[] args) {
 		
@@ -89,8 +101,36 @@ public class GerarRelatorio extends JDialog {
 		botaoExportarRelatorio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				chamadasBD = new ArrayList<Chamada>();
+				try {
+					chamadasBD = (ArrayList<Chamada>) fachada.listarChamada();
+					caixasBD = (ArrayList<Caixa>) fachada.listarCaixa();
+
 				
-				
+				JFileChooser chooser;
+				chooser = new JFileChooser();
+				Relatorio relatorio;
+
+				String caminho = "";
+
+				int retorno = chooser.showSaveDialog(null);
+
+				if (retorno == JFileChooser.APPROVE_OPTION) {
+
+					caminho = chooser.getSelectedFile().getAbsolutePath();
+					relatorio = new Relatorio();
+					try {
+						relatorio.relatorioAtendimento(caixasBD,
+								chamadasBD, caminho);
+
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+
+				}
+				} catch (SQLException e2) {
+					e2.printStackTrace();
+				}
 			}
 		});
 		botaoExportarRelatorio.setBounds(415, 184, 180, 35);
@@ -119,6 +159,33 @@ public class GerarRelatorio extends JDialog {
 		lblNewLabel.setBounds(0, 0, 633, 251);
 		lblNewLabel.setIcon(new ImageIcon(TrocarFrase.class.getResource("/view/img/gerar_relatorio.jpg")));
 		contentPanel.add(lblNewLabel);
+		
+		
+		// informacao dos caixas 
+		//-----------------------------------------------------------------
+		fachada = Fachada.getInstance();
+		caixasBD = new ArrayList<Caixa>();
+		
+		try {
+			caixasBD = (ArrayList<Caixa>) fachada.listarCaixa();
+			
+			comboBox.addItem("");// adicionar a 1º entrada vazio
+			for (Caixa caixa : caixasBD) {
+				
+				comboBox.addItem(caixa.getCaixa());
+				
+			}
+			
+			
+			
+			
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		
+		
+		//-----------------------------------------------------------------
+		
 		
 	}
 	
