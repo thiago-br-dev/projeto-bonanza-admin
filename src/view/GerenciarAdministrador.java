@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -20,7 +21,6 @@ import javax.swing.UIManager;
 import javax.swing.JButton;
 
 import models.Administrador;
-import models.Caixa;
 import facade.Fachada;
 
 import java.awt.event.ActionListener;
@@ -40,7 +40,10 @@ public class GerenciarAdministrador extends JDialog {
 	JLabel sucesso, fundoMensagemSalvo;
 
 	private Fachada fachada;
-	private List<models.Administrador> administradoresBD;
+	private List<Administrador> administradoresBD;
+	
+	int coluna = 0;
+	int linha = 0;
 
 	public static void main(String[] args) {
 
@@ -155,7 +158,49 @@ public class GerenciarAdministrador extends JDialog {
 		btnRemoverCaixa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				
+				if (tabelaDeResultados.isCellSelected(linha, coluna)) {
+
+					int decisao = JOptionPane
+							.showConfirmDialog(
+									null,
+									"Tem certeza que deseja excluir este administrador ? Os dados não poderam ser recuperados.",
+									"Confirmação de Exclusão",
+									JOptionPane.INFORMATION_MESSAGE);
+
+					if (decisao == 1) {
+
+						// Não fazer nada ...
+
+					}
+
+					else if (decisao == 0) {
+
+						int row = tabelaDeResultados.getSelectedRow();
+
+						models.Administrador administradorRemover = new models.Administrador();
+						administradorRemover.setId(administradoresBD.get(row).getId());
+
+						try {
+
+							fachada.removerAdministrador(administradorRemover);
+
+							fundoMensagemSalvo.setVisible(true);
+							sucesso.setText("Administrador Deletado com Sucesso.");
+							sucesso.setVisible(true);
+
+							atualizarNovamenteTabela();
+
+						}
+
+						catch (SQLException e) {
+
+							e.printStackTrace();
+
+						}
+
+					}
+
+				}
 				
 			}
 		});
@@ -191,6 +236,43 @@ public class GerenciarAdministrador extends JDialog {
 		int height = table.getRowHeight();
 		table.setRowHeight(height + 7);
 
+	}
+	
+	public void atualizarNovamenteTabela() {
+		
+		Fachada fachada2 = Fachada.getInstance();
+		administradoresBD = new ArrayList<models.Administrador>();
+
+		try {
+
+			administradoresBD = fachada2.listarAdministrador();
+
+		}
+
+		catch (SQLException e) {
+
+			e.printStackTrace();
+
+		}
+		
+		String[][] dados2 = new String[administradoresBD.size()][];
+		int i = 0;
+
+		for (Administrador adm : administradoresBD) {
+
+			dados2[i] = new String[] { String.valueOf(adm.getNome()),
+					adm.getLogin() };
+
+			i += 1;
+
+		}
+		
+		DefaultTableModel modelo2 = new DefaultTableModel(dados2, colunas);
+		tabelaDeResultados.setModel(modelo2);
+		
+		tabelaDeResultados.getColumnModel().getColumn(0).setPreferredWidth(500);
+		tabelaDeResultados.getColumnModel().getColumn(1).setPreferredWidth(250);
+		
 	}
 
 }

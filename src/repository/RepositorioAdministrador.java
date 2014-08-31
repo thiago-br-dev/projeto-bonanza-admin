@@ -50,7 +50,7 @@ public class RepositorioAdministrador implements IRepositorioAdministrador {
 	public boolean removerAdministrador(Administrador administrador)
 			throws SQLException {
 
-		String sql = "DELETE FROM bem_segurado WHERE id=?";
+		String sql = "DELETE FROM administrador WHERE id=?";
 
 		try {
 			Connection conIntranet = new ConnectionFactory()
@@ -147,9 +147,6 @@ public class RepositorioAdministrador implements IRepositorioAdministrador {
 			ResultSet rs1 = stm1.executeQuery();
 
 			while (rs1.next()) {
-
-				String loginBD = rs1.getString(1);
-				String senhaBD = rs1.getString(2);
 				
 				
 				Administrador adm = new Administrador();
