@@ -41,9 +41,6 @@ public class CadastroAdministrador extends JDialog {
 
 		try {
 
-			UIManager
-					.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-
 			CadastroAdministrador dialog = new CadastroAdministrador();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);

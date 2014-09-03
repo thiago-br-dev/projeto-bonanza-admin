@@ -50,9 +50,6 @@ public class GerenciarAdministrador extends JDialog {
 
 		try {
 
-			UIManager
-					.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-
 			GerenciarAdministrador dialog = new GerenciarAdministrador();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);

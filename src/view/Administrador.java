@@ -34,9 +34,6 @@ public class Administrador extends JFrame {
 
 				try {
 
-					UIManager
-							.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-
 					Administrador frame = new Administrador();
 					frame.setVisible(true);
 

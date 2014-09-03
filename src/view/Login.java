@@ -51,9 +51,6 @@ public class Login extends JFrame {
 			public void run() {
 
 				try {
-
-					UIManager
-						.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 					
 					Login frame = new Login();
 					frame.setVisible(true);

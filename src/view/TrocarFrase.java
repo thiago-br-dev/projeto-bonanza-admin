@@ -37,9 +37,6 @@ public class TrocarFrase extends JDialog {
 
 		try {
 
-			UIManager
-					.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-
 			TrocarFrase dialog = new TrocarFrase();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);

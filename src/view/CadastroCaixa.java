@@ -38,9 +38,6 @@ public class CadastroCaixa extends JDialog {
 
 		try {
 
-			UIManager
-					.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-
 			CadastroCaixa dialog = new CadastroCaixa();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);

@@ -47,9 +47,6 @@ public class GerarRelatorio extends JDialog {
 		
 		try {
 			
-			UIManager
-			.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-			
 			GerarRelatorio dialog = new GerarRelatorio();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
