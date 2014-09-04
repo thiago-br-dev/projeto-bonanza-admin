@@ -304,7 +304,7 @@ public class Relatorio {
 			document.close();
 			
 			try {
-				Runtime.getRuntime().exec (new String[]{"cmd.exe", "/c", "start", caminho+".pdf"});
+				Runtime.getRuntime().exec (new String[]{"cmd.exe", "/c", "start ", caminho+".pdf"});
 			} catch (IOException e) {
 				e.printStackTrace();
 			}  
