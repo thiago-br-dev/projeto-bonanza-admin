@@ -85,7 +85,7 @@ public class Login extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel botaoPrincipal = new JLabel("");
+		final JLabel botaoPrincipal = new JLabel("");
 		botaoPrincipal.addMouseListener(new MouseAdapter() {
 
 			@Override

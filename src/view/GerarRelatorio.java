@@ -98,7 +98,7 @@ public class GerarRelatorio extends JDialog {
 		botaoExportarRelatorio.setBounds(415, 184, 180, 35);
 		contentPanel.add(botaoExportarRelatorio);
 		
-		JComboBox<String> comboBox = new JComboBox<String>();
+		final JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.setBounds(415, 140, 179, 33);
 		contentPanel.add(comboBox);
 		
