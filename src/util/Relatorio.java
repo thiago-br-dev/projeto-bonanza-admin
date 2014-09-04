@@ -82,7 +82,7 @@ public class Relatorio {
 			Font fonte2 = new Font(FontFamily.TIMES_ROMAN, 12, Font.NORMAL);
 			Paragraph tituloPrincipal = new Paragraph("Bonanza Supermercados", fonte);
 			Paragraph tituloEndereco = new Paragraph(
-					"Av. Geraldo de Andrade, 100 - Indianópolis - Caruaru-PE", fonte2);
+					"Loja XY", fonte2);
 
 			tituloPrincipal.setSpacingBefore(15);
 			tituloEndereco.setSpacingAfter(10);
@@ -179,6 +179,7 @@ public class Relatorio {
 			table.addCell(inicioVigencia);
 
 			int corBorda = 0;
+			int numeroLinhas = 0;
 			
 
 			for (int i = 0; i < caixas.size(); i++) {
@@ -222,6 +223,7 @@ public class Relatorio {
 					table.addCell(inicioVigencia2);
 
 					corBorda = 1;
+					numeroLinhas++;
 					continue;
 
 				}
@@ -262,6 +264,7 @@ public class Relatorio {
 						table.addCell(inicioVigencia2);
 
 						corBorda = 0;
+						numeroLinhas++;
 						continue;
 				}
 					}
@@ -282,7 +285,7 @@ public class Relatorio {
 
 			// ----------------------------------------------------------------------------------------
 			Calendar data = Calendar.getInstance();
-			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 			Date d = data.getTime();
 			String dataAtual = dateFormat.format(d);
 			Font fonte5 = new Font(FontFamily.TIMES_ROMAN, 8, Font.NORMAL);
@@ -290,7 +293,7 @@ public class Relatorio {
 					"Bonanza Supermercados                                       Documento Gerado em: "
 							+ dataAtual
 							+ "                                                                       "
-							+ chamadas.size() + " Atendimento(s)", fonte5);
+							+ numeroLinhas + " Atendimento(s)", fonte5);
 			rodape.setSpacingBefore(0);
 			rodape.setAlignment(Element.ALIGN_CENTER);
 

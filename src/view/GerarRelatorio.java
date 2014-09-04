@@ -74,7 +74,7 @@ public class GerarRelatorio extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
-		dataInicial = new JFormattedTextField(setMascara("##/##/####"));
+		dataInicial = new JFormattedTextField(setMascara("####-##-##"));
 		dataInicial.setBounds(37, 140, 179, 34);
 		contentPanel.add(dataInicial);
 		dataInicial.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -84,7 +84,7 @@ public class GerarRelatorio extends JDialog {
 				dataInicial.getBorder(),
 				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 		
-		dataFinal = new JFormattedTextField(setMascara("##/##/####"));
+		dataFinal = new JFormattedTextField(setMascara("####-##-##"));
 		dataFinal.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		dataFinal.setColumns(10);
 		
@@ -129,8 +129,14 @@ public class GerarRelatorio extends JDialog {
 				chamadasBD = new ArrayList<Chamada>();
 				try {
 					chamadasBD = (ArrayList<Chamada>) fachada.buscarPorDatas(dataInicial.getText().toString(), dataFinal.getText().toString());
+					
+					
+					if (comboBox.getSelectedItem().toString().equals("")){
+						caixasBD = (ArrayList<Caixa>) fachada.listarCaixa();
+					}
+					else{
 					caixasBD = (ArrayList<Caixa>) fachada.buscarPorCaixa(comboBox.getSelectedItem().toString());
-
+					}
 				
 				JFileChooser chooser;
 				chooser = new JFileChooser();
@@ -190,11 +196,11 @@ public class GerarRelatorio extends JDialog {
 	
 	public boolean validarTodasDatas(String data) {
 
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		sdf.setLenient(false);
 		String dataString = data;
 
-		if (data.equals("  /  /    ")) {
+		if (data.equals("    -  -  ")) {
 			return true;
 		}
 
