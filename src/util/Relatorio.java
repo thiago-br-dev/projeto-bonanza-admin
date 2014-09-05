@@ -1,5 +1,7 @@
 package util;
 
+import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -10,6 +12,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+
+import sun.org.mozilla.javascript.internal.regexp.SubString;
 import models.Caixa;
 import models.Chamada;
 
@@ -19,12 +27,15 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfTemplate;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.draw.LineSeparator;
 
@@ -36,6 +47,12 @@ public class Relatorio {
 
 		String resource = "/view/img/logo-bonanza.png";
 		Document document = new Document(PageSize.A4, 40, 40, 40, 40);
+		PdfContentByte content;
+		PdfTemplate template;
+		Graphics2D graphics;
+		Rectangle2D rectangle;
+		JFreeChart chart;
+		DefaultCategoryDataset dataSet;
 
 		/** caminho da imagem. */
 
@@ -273,6 +290,8 @@ public class Relatorio {
 			}
 
 			document.add(table);
+			
+						
 
 			// ----------------------------------------------------------------------------------------
 
@@ -300,8 +319,138 @@ public class Relatorio {
 			document.add(rodape);
 			// ----------------------------------------------------------------------------------------
 
+			
+document.newPage();
+			
+			//-----------------------------------------------------------------------------------------
+			// Gerado o grafico
+			//-----------------------------------------------------------------------------------------
+			
+			Rectangle pgz = writer.getPageSize();
+			int x1 = 0;
+			int y1 = 0;
+			int x2 = (int)pgz.getWidth();
+			int y2 = (int)pgz.getHeight();
+
+			
+			content = writer.getDirectContent();
+			template = content.createTemplate(x2, y2);
+			graphics = template.createGraphics(x2, y2);
+			
+			rectangle = new Rectangle2D.Double(x1, y1, x2, y2);
+			
+			dataSet = new DefaultCategoryDataset();
+			
+			long antedimentoJar = 0;
+			long antedimentoFev = 0;
+			long antedimentoMar = 0;
+			long antedimentoAbr = 0;
+			long antedimentoMai = 0;
+			long antedimentoJun = 0;
+			long antedimentoJul = 0;
+			long antedimentoAgo = 0;
+			long antedimentoSet = 0;
+			long antedimentoOut = 0;
+			long antedimentoNov = 0;
+			long antedimentoDez = 0;
+			
+			for(int i = 0; i < caixas.size(); i++){ 
+				
+				for (int j = 0; j < chamadas.size(); j++){
+					
+					if (chamadas.get(j).getCaixaId() == caixas.get(i).getId()){
+						
+						String dataValidacao = chamadas.get(j).getData().substring(5,7);
+						
+
+						
+						if (dataValidacao.equals("01")){
+							antedimentoJar++;
+							dataSet.setValue(antedimentoJar, "Caixa "+caixas.get(i).getCaixa(), "Jan");
+						}
+						if (dataValidacao.equals("02")){
+							antedimentoFev++;
+							dataSet.setValue(antedimentoFev, "Caixa "+caixas.get(i).getCaixa(), "Fev");
+						}
+						if (dataValidacao.equals("03")){
+							antedimentoMar++;
+							dataSet.setValue(antedimentoMar, "Caixa "+caixas.get(i).getCaixa(), "Mar");
+						}
+						if (dataValidacao.equals("04")){
+							antedimentoAbr++;
+							dataSet.setValue(antedimentoAbr, "Caixa "+caixas.get(i).getCaixa(), "Abr");
+						}
+						if (dataValidacao.equals("05")){
+							antedimentoMai++;
+							dataSet.setValue(antedimentoMai, "Caixa "+caixas.get(i).getCaixa(), "Mai");
+						}
+						if (dataValidacao.equals("06")){
+							antedimentoJun++;
+							dataSet.setValue(antedimentoJun, "Caixa "+caixas.get(i).getCaixa(), "Jun");
+						}
+						if (dataValidacao.equals("07")){
+							antedimentoJul++;
+							dataSet.setValue(antedimentoJul, "Caixa "+caixas.get(i).getCaixa(), "Jul");
+						}
+						if (dataValidacao.equals("08")){
+							antedimentoAgo++;
+							dataSet.setValue(antedimentoAgo, "Caixa "+caixas.get(i).getCaixa(), "Ago");
+						}
+
+						if (dataValidacao.equals("09")){
+							antedimentoSet++;
+							dataSet.setValue(antedimentoSet, "Caixa "+caixas.get(i).getCaixa(), "Set");
+						}
+
+						if (dataValidacao.equals("10")){
+							antedimentoOut++;
+							dataSet.setValue(antedimentoOut, "Caixa "+caixas.get(i).getCaixa(), "Out");
+						}
+
+						if (dataValidacao.equals("11")){
+							antedimentoNov++;
+							dataSet.setValue(antedimentoNov, "Caixa "+caixas.get(i).getCaixa(), "Nov");
+						}
+
+						if (dataValidacao.equals("12")){
+							antedimentoDez++;
+							dataSet.setValue(antedimentoDez, "Caixa "+caixas.get(i).getCaixa(), "Dez");
+						}
+						
+					
+					}
+					
+
+				}
+				antedimentoJar = 0;
+				antedimentoFev = 0;
+				antedimentoMar = 0;
+				antedimentoAbr = 0;
+				antedimentoMai = 0;
+				antedimentoJun = 0;
+				antedimentoJul = 0;
+				antedimentoAgo = 0;
+				antedimentoSet = 0;
+				antedimentoOut = 0;
+				antedimentoNov = 0;
+				antedimentoDez = 0;
+
+			}
+
+			
+			chart = ChartFactory.createBarChart("Índice de Atendimentos Realizados", "Meses", "Qtd. de Atendimento Realizados", dataSet, PlotOrientation.HORIZONTAL, true, true, true);
+			
+			chart.draw(graphics, rectangle);
+			
+			graphics.dispose();
+			content.addTemplate(template, 0, 0);
+
 
 			document.close();
+			
+			
+
+			
 			
 			try {
 				Runtime.getRuntime().exec (new String[]{"cmd.exe", "/c", "start ", caminho+".pdf"});
